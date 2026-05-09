@@ -192,10 +192,6 @@ st.markdown(f"""
 <p style="font-size:23px;box-shadow:grey 10px 10px 46px;box-shadow:black 10px 15px 26px;border-radius:30px;padding:50px;">Choosing the right stream after 10th or 12th can shape your future — but making that decision is often confusing.
 <br>
 Margdarshak AI helps students discover the most suitable stream and career path using the power of Artificial Intelligence.</p>
-<p style="font-size:23px;box-shadow:grey 10px 10px 46px;box-shadow:black 10px 15px 26px;border-radius:30px;padding:50px;">
-Choosing the right stream after 10th or 12th can shape your future — but making that decision is often confusing.
-Margdarshak AI helps students discover the most suitable stream and career path using the power of Artificial Intelligence.
-</p>
 <p style="font-size:23px;box-shadow:grey 10px 10px 46px;box-shadow:black 10px 15px 26px;border-radius:30px;padding:50px;">Whether you're interested in Science, Commerce, Arts, Technology, Design, Medical, Government Jobs, Business, or Creative Fields, our AI analyzes your:
 </p>
 <ul style="font-size:23px;box-shadow:grey 10px 10px 46px;box-shadow:black 10px 15px 26px;border-radius:30px;padding:50px;">
