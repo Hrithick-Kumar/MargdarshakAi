@@ -67,7 +67,7 @@ The system provides smart AI-based recommendations for streams like:
 MargdarshakAI/
 │
 ├── MargdarshakAi.py
-├── pages/
+├── pages/Dashboard.py
 ├── images/
 ├── background_img/
 ├── requirements.txt
