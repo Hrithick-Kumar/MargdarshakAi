@@ -172,9 +172,6 @@ def SignIn():
     t1=st.text_input("Username",width=400)
     t2=st.text_input("Password",type="password",width=400)
     if st.button("SIGNIN"):
-        conn=MongoClient("mongodb+srv://StreamDecider:stream123@cluster0.fgaudsd.mongodb.net/?appName=Cluster0")
-        db=conn["User"]
-        coll=db["Info"]
         user_fetch=coll.find_one({"Name":t1,"Pass":t2})
         if user_fetch:
                 st.session_state['User']=t1
@@ -199,26 +196,24 @@ def SignUp():
     dob=c2.date_input("DOB",value=date.today(),min_value=min_date,max_value=max_date,width=350)
     photo=c2.camera_input("Live Photo",width=350)
     count=random.randint(1,100)
-    str1="img"+str(count)+".png"
-    if st.button("SAVE") and name!="" and Password!="" and dob!="" and address!="":
-        if photo:
-                filepath=os.path.join("images",str1)
-                bytes_data=photo.getbuffer()
-                with open(filepath,"wb") as f:
-                        f.write(bytes_data)
-        conn=MongoClient("mongodb+srv://StreamDecider:stream123@cluster0.fgaudsd.mongodb.net/?appName=Cluster0")
-        db=conn["User"]
-        coll=db["Info"]
-        if coll.find_one({"Name":name}) and coll.find_one({"Pass":Password}):
-                st.warning("Already Exist")
-        else:
-                if name=="" or Password=="" or address=="" or dob=="" or photo=="":
-                        st.toast("Required field details")
+    str1=""
+    if photo:
+            str1="img"+str(count)+".png"
+            filepath=os.path.join("images",str1)
+            bytes_data=photo.getbuffer()
+            with open(filepath,"wb") as f:
+                    f.write(bytes_data)
+            if st.button("SAVE") and name!="" and Password!="" and dob!="" and address!="" and str1!="":
+                if coll.find_one({"Name":name}) and coll.find_one({"Pass":Password}):
+                    st.warning("Already Exist")
                 else:
-
-                        coll.insert_one({"Name":name,"Pass":Password,"course":c,"Gender":g,"Address":address,"DOB":str(dob),"Photo":str1})
-                        st.toast("Successfully Registered")
-                        st.switch_page("MargdarshakAi.py")
+                    coll.insert_one({"Name":name,"Pass":Password,"course":c,"Gender":g,"Address":address,"DOB":str(dob),"Photo":str1})
+                    st.toast("Successfully Registered")
+                    time.sleep(2)
+                    st.switch_page("MargdarshakAi.py")
+            else:
+                if name=="" or Password=="" or address=="" or dob=="" or str1=="":
+                    st.toast("Required field details")
 with st.sidebar:
     if st.button("Profile",use_container_width=True):
         profile()
@@ -230,4 +225,3 @@ with st.sidebar:
         SignUp()
     if st.button("Sign In",use_container_width=True):
         SignIn()
-
