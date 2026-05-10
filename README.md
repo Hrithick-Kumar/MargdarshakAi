@@ -1,4 +1,4 @@
 # Author
 Hrithick kumar
 # Live Demo
-https://margdarshakai1.streamlit.app/
+https://margdarshakai-1.streamlit.app/
