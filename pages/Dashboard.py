@@ -7,7 +7,11 @@ conn=MongoClient("mongodb+srv://StreamDecider:stream123@cluster0.fgaudsd.mongodb
 db=conn["User"]
 coll=db["Info"]
 c1,c2,c3,c4,c5,c6,c7=st.columns([10,8,8,25,25,15,15])
-
+if "User" not in st.session_state:
+       st.toast("Please Sign in ..")
+       time.sleep(2)
+       st.switch_page("MargdarshakAi.py")
+str1=st.session_state["User"]
 def add_bg(image_file):
 
     with open(image_file, "rb") as image:
@@ -28,22 +32,9 @@ def add_bg(image_file):
     """, unsafe_allow_html=True)
 add_bg("background_img/bg.png")
 
-if "User" not in st.session_state:
-       st.toast("Please Sign in ..")
-       time.sleep(2)
-       st.switch_page("MargdarshakAi.py")
-str1=st.session_state["User"]
 st.markdown(f"""
-<h1 style="color:#1A2421;padding:30px 70px 30px ;border-radius:30px;box-shadow:#1A2421 1px 1px 10px;">Welcome, {str1}</h1>
 <h6 style="color:#1A2421;font-size:23px;box-shadow:#1A2421 10px 10px 46px;box-shadow:#1A2421 10px 15px 26px;border-radius:30px;padding:10px 50px;">Explore your potential, discover your strengths, and make smarter academic decisions with Margdarshak AI.</h6>""",unsafe_allow_html=True)
-if c6.button("SignOut",type="primary"):
-       st.session_state.clear()
-       st.switch_page("MargdarshakAi.py")
 pasd=""
-for x in coll.find({'Name':str1}):
-       st.session_state["img"]=f"{x['Photo']}"
-       c7.image(f"images/{x['Photo']}",width=300)
-       pasd=x['Pass']
 
 @st.dialog("Update photo")
 def updatePhoto():
@@ -67,8 +58,6 @@ def updatePhoto():
               st.toast("Updated successfully")
               time.sleep(2)
               st.switch_page("pages/Dashboard.py")
-if c5.button("Update Photo",type="primary"):
-       updatePhoto()
 
 
 @st.dialog("Change Password")
@@ -79,8 +68,21 @@ def updatePass():
               if oldpass==pasd:
                      coll.update_one({"Pass":oldpass},{"$set":{"Pass":newpass}})
                      st.success("password updated successfully")
+                     time.sleep(2)
+                     st.switch_page("pages/Dashboard.py")
               else:
                      st.error("Password not found")
-if c4.button("Change Password",type="primary"):
-       updatePass()
+with st.sidebar:
+       st.subheader(f"Welcome,{str1}")
+       for x in coll.find({'Name':str1}):
+              st.session_state["img"]=f"{x['Photo']}"
+              st.image(f"images/{x['Photo']}",width=300)
+              pasd=x['Pass']
+       if st.button("Update Photo",use_container_width=True):
+              updatePhoto()
+       if st.button("Change Password",use_container_width=True):
+              updatePass()
+       if st.button("SignOut",use_container_width=True):
+              st.session_state.clear()
+              st.switch_page("MargdarshakAi.py")
 
