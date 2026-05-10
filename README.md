@@ -63,8 +63,16 @@ The system provides smart AI-based recommendations for streams like:
 
 ## 📂 Project Structure
 
-## ER and DFD Diagram
-## System Design
-![System Design](images/dfd.png)
+```bash
+MargdarshakAI/
+│
+├── MargdarshakAi.py
+├── pages/
+├── images/
+├── background_img/
 ├── requirements.txt
 └── README.md
+```
+## System Design
+
+![System Design](images/diagram.png)
