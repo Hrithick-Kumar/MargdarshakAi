@@ -70,5 +70,8 @@ MargdarshakAI/
 ├── pages/Dashboard.py
 ├── images/
 ├── background_img/
+```
+## ER and DFD Diagram
+
 ├── requirements.txt
 └── README.md
