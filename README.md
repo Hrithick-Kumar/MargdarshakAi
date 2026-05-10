@@ -72,6 +72,7 @@ MargdarshakAI/
 ├── background_img/
 ```
 ## ER and DFD Diagram
-
+## System Design
+![System Design](images/dfd.png)
 ├── requirements.txt
 └── README.md
