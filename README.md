@@ -75,4 +75,4 @@ MargdarshakAI/
 ```
 ## System Design
 
-![System Design](images/diagram.png)
+![System Design](images/dfd.png)
