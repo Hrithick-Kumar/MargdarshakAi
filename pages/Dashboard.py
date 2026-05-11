@@ -74,11 +74,7 @@ if st.button("Get Suggestion",use_container_width=True,type="primary"):
 @st.dialog("User Input")
 def Userdetail():
        if st.button("Enter marks"):
-              @st.dialog("Marks")
-              def subje():
-                  sub1=st.multiselect("Choose subjects of class 10th",['Maths','Science','Social Science','English','Hindi','Sanskrit','Computer'])
-              if st.button("Save"):
-                   subje()
+               sub1=st.multiselect("Choose subjects of class 10th",['Maths','Science','Social Science','English','Hindi','Sanskrit','Computer'])
       # if st.button("Select Choice",use_container_width=True):
               #pass
        #if st.button("Select preference level",use_container_width=True):
