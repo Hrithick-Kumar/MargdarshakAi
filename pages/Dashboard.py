@@ -72,14 +72,14 @@ if st.button("Get Suggestion",use_container_width=True,type="primary"):
 # a1.pie(marks,labels=subject,colors=['red','green'],autopct="%1.0f%%",explode=[0.1,0.1,0],shadow=True)
 # st.pyplot(p1)
 sub1=[]
-sum=0
 @st.dialog("User Input")
 def Userdetail():
+       sum=0
        sub1=st.multiselect("Choose subjects of class 10th",['Maths','Science','Social Science','English','Hindi','Sanskrit','Computer'])
        for x in range(len(sub1)):
               marks=st.number_input(f"Enter marks in {sub1[x]}",value=0)
               sum=sum+marks
-       mean=sum/len(sub1)
+       mean=sum / len(sub1)
        st.toast(f"mean is {mean}")
 if st.button("User Input"):
        Userdetail()
