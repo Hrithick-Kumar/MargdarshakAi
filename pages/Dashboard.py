@@ -44,7 +44,7 @@ pasd=""
 st.markdown(f"""
 <h6 style="color:#1A2421;font-size:23px;box-shadow:#1A2421 10px 10px 46px;box-shadow:#1A2421 10px 15px 26px;border-radius:30px;padding:10px 50px;">Explore your potential, discover your strengths, and make smarter academic decisions with Margdarshak AI.</h6><br><br>
 <h2 style="color:#1A2421;">What your goals write here</h2><br<br>
-<h5 style="color:rgb(6, 126, 116);padding-bottom:0px;padding-left:10px;">What's in your mind write here</h5>
+<h5 style="color:rgb(0, 126, 116);padding-bottom:0px;padding-left:10px;">What's in your mind write here</h5>
 """,unsafe_allow_html=True)
 data=pd.read_csv("Stream1.csv",encoding="latin-1")
 df=pd.DataFrame(data)
