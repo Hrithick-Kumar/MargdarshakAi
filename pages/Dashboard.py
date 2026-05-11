@@ -78,6 +78,7 @@ def Userdetail():
               def marks():
                   st.multiselect("Choose subjects of class 10th",['Maths','Science','Social Science','English','Hindi','Sanskrit','Computer'])
               if st.button("Save"):
+                   marks()
                   st.write("hello")
       # if st.button("Select Choice",use_container_width=True):
               #pass
