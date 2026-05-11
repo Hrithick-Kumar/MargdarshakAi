@@ -71,9 +71,12 @@ if st.button("Get Suggestion",use_container_width=True,type="primary"):
 # p1,a1=plt.subplots()
 # a1.pie(marks,labels=subject,colors=['red','green'],autopct="%1.0f%%",explode=[0.1,0.1,0],shadow=True)
 # st.pyplot(p1)
+sub1=[]
 @st.dialog("User Input")
 def Userdetail():
-       sub1=st.multiselect("Choose subjects of class 10th",['Maths','Science','Social Science','English','Hindi','Sanskrit','Computer'])  
+       sub1=st.multiselect("Choose subjects of class 10th",['Maths','Science','Social Science','English','Hindi','Sanskrit','Computer'])
+       for x in range(len(sub1)):
+              marks=st.number_input(f"Enter marks in {sub1[x]}",value=0)
 if st.button("User Input"):
        Userdetail()
 @st.dialog("Update photo")
