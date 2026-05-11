@@ -71,7 +71,20 @@ if st.button("Get Suggestion",use_container_width=True,type="primary"):
 # p1,a1=plt.subplots()
 # a1.pie(marks,labels=subject,colors=['red','green'],autopct="%1.0f%%",explode=[0.1,0.1,0],shadow=True)
 # st.pyplot(p1)
-
+@st.dialog("User Input")
+def Userdetail():
+       if st.button("Enter marks",user_container_width=True):
+              @st.dialog("Marks")
+              def marks():
+                  st.multiselect("Choose subjects of class 10th",['Maths','Science','Social Science','English','Hindi','Sanskrit','Computer'])
+              if st.button("Save"):
+                  pass
+       if st.button("Select Choice",use_container_width=True):
+              pass
+       if st.button("Select preference level",use_container_width=True):
+              pass
+if st.button("User Input"):
+       Userdetail()
 @st.dialog("Update photo")
 def updatePhoto():
        c1,c2=st.columns(2)
