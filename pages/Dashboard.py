@@ -75,10 +75,12 @@ sub1=[]
 @st.dialog("User Input")
 def Userdetail():
        sum=0
+       mean=0
        sub1=st.multiselect("Choose subjects of class 10th",['Maths','Science','Social Science','English','Hindi','Sanskrit','Computer'])
        for x in range(len(sub1)):
               marks=st.number_input(f"Enter marks in {sub1[x]}",value=0)
               sum=sum+marks
+              mean=len(sub1)
        if mean!=0 and sum!=0:
               mean=sum / len(sub1)
               st.toast(f"mean is {mean} and {sum}")
