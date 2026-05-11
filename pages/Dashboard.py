@@ -81,9 +81,9 @@ def Userdetail():
               marks=st.number_input(f"Enter marks in {sub1[x]}",value=0)
               sum=sum+marks
               mean=len(sub1)
-       if mean!=0 and sum!=0:
-              mean=sum / len(sub1)
-              st.toast(f"mean is {mean} and {sum}")
+       if st.button("Submit"):
+              mean=int(sum / len(sub1))
+              st.write(f"Mean is {mean}")
 if st.button("User Input"):
        Userdetail()
 @st.dialog("Update photo")
