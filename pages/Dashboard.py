@@ -79,7 +79,7 @@ def Userdetail():
        for x in range(len(sub1)):
               marks=st.number_input(f"Enter marks in {sub1[x]}",value=0)
               sum=sum+marks
-       mean=sum / len(sub1)
+       mean=len(sub1)
        st.toast(f"mean is {mean}")
 if st.button("User Input"):
        Userdetail()
