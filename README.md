@@ -1,5 +1,6 @@
 # Margdarshak AI
-
+## Demo Link
+https://margdarshakaii.streamlit.app/
 Your Smart Career & Stream Guidance Partner
 
 ## 📌 About the Project
