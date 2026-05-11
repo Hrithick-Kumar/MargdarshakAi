@@ -73,7 +73,7 @@ if st.button("Get Suggestion",use_container_width=True,type="primary"):
 # st.pyplot(p1)
 @st.dialog("User Input")
 def Userdetail():
-       if st.button("Enter marks",user_container_width=True):
+       if st.button("Enter marks"):
               @st.dialog("Marks")
               def marks():
                   st.multiselect("Choose subjects of class 10th",['Maths','Science','Social Science','English','Hindi','Sanskrit','Computer'])
