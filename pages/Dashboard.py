@@ -87,8 +87,8 @@ def Userdetail():
               mean=len(sub1)
        if st.button("Submit"):
               mean=int(sum / len(sub1))
-              X1=df['Average']
-              y1=df['Stream']
+              X1=df1['Average']
+              y1=df1['Stream']
               model.fit(X1,y1)
               predi=model.predict([[mean]])
               st.write(f"Mean is {predi}")
