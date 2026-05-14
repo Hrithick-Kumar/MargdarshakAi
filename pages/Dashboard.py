@@ -94,7 +94,7 @@ if st.button("Submit"):
        Final={'Result':[data1,data2]}
 preference_data=pd.read_csv("Preference.csv")
 df2=pd.DataFrame(preference_data)
-X2=df[['Maths_Interest','Science_Interest','Business_Interest','Creativity','Stress_Handling_Level','Stream']]
+X2=df2[['Maths_Interest','Science_Interest','Business_Interest','Creativity','Stress_Handling_Level','Stream']]
 st.write(X2)
 st.header("Preference level")
 Maths_int=st.slider("Maths Interest",0,10)
