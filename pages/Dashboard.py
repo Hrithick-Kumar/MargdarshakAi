@@ -71,7 +71,6 @@ if st.button("Get Suggestion",use_container_width=True,type="primary"):
 # p1,a1=plt.subplots()
 # a1.pie(marks,labels=subject,colors=['red','green'],autopct="%1.0f%%",explode=[0.1,0.1,0],shadow=True)
 # st.pyplot(p1)
-Final={}
 user_mark_data=pd.read_csv('StudentMark.csv',encoding="latin-1")
 df1=pd.DataFrame(user_mark_data)
 inp=df1[['Average']]
@@ -79,24 +78,20 @@ out=df1['Stream']
 model=DecisionTreeClassifier()
 model.fit(inp,out)
 sub1=[]
-@st.dialog("User Input")
-def Userdetail():
-       sum=0
-       mean=0
-       sub1=st.multiselect("Choose subjects of class 10th",['Maths','Science','Social Science','English','Hindi','Sanskrit','Computer'])
-       for x in range(len(sub1)):
-              marks=st.number_input(f"Enter marks in {sub1[x]}",value=0)
-              sum=sum+marks
-              mean=len(sub1)
-       if st.button("Submit"):
-              mean=int(sum / len(sub1))
-              predi=model.predict([[mean]])  
-              data2=predi[0]
-              st.write(f"According to marks you can choose \n{predi[0]}")
-              Final={'Result':[data1,data2]}
-if st.button("User Input"):
-       st.toast(Final)
-       Userdetail()
+sum=0
+mean=0
+sub1=st.multiselect("Choose subjects of class 10th",['Maths','Science','Social Science','English','Hindi','Sanskrit','Computer'])
+for x in range(len(sub1)):
+       marks=st.number_input(f"Enter marks in {sub1[x]}",value=0)
+       sum=sum+marks
+       mean=len(sub1)
+if st.button("Submit"):
+       mean=int(sum / len(sub1))
+       predi=model.predict([[mean]])  
+       data2=predi[0]
+       st.write(f"According to marks you can choose \n{predi[0]}")
+       Final={'Result':[data1,data2]}
+st.write(Final['Result'])
 @st.dialog("Update photo")
 def updatePhoto():
        c1,c2=st.columns(2)
