@@ -95,13 +95,25 @@ if st.button("Submit"):
 preference_data=pd.read_csv("Preference.csv")
 df2=pd.DataFrame(preference_data)
 X2=df2[['Maths_Interest','Science_Interest','Business_Interest','Creativity','Stress_Handling_Level','Stream']]
-st.write(X2)
+y2=df2['Stream']
+model=DecisionTreeClassifier()
+model.fit(X2,y2)
+
 st.header("Preference level")
-Maths_int=st.slider("Maths Interest",0,10)
-Sci_int=st.slider("Science Interest",0,10)
-Busi_int=st.slider("Business Interest",0,10)
-creativity=st.slider("Creativity",0,10)
-stress=st.slider("stress Handling level",0,10)
+Maths_Interest=st.slider("Maths Interest",0,10)
+Science_Interest=st.slider("Science Interest",0,10)
+Business_Interest=st.slider("Business Interest",0,10)
+Creativity=st.slider("Creativity",0,10)
+Stress_Handling_Level=st.slider("stress Handling level",0,10)
+int_data={
+       'Maths_Interest':Maths_Interest,
+       'Science_Interest':Science_Interest,
+       'Business_Interest':Business_Interest,
+       'Creativity':Creativity,
+       'Stress_Handling_Level':Stress_Handling_Level
+}
+preference_prediction=model.predict([[int_data]])
+st.toast(preference_prediction)
 @st.dialog("Update photo")
 def updatePhoto():
        c1,c2=st.columns(2)
