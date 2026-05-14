@@ -92,8 +92,13 @@ if st.button("Submit"):
        data2=predi[0]
        st.write(f"According to marks you can choose \n{predi[0]}")
        Final={'Result':[data1,data2]}
-st.write(Final)
 
+st.header("Preference level")
+Maths_int=st.slider("Maths Interest",0,10)
+Sci_int=st.slider("Science Interest",0,10)
+Busi_int=st.slider("Business Interest",0,10)
+creativity=st.slider("Creativity",0,10)
+stress=st.slider("stress Handling level",0,10)
 @st.dialog("Update photo")
 def updatePhoto():
        c1,c2=st.columns(2)
