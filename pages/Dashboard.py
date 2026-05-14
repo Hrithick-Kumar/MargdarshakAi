@@ -94,7 +94,7 @@ if st.button("Submit"):
        Final={'Result':[data1,data2]}
 preference_data=pd.read_csv("Preference.csv")
 df2=pd.DataFrame(preference_data)
-inp1=df2[['Maths_Interest','Science_Interest','Business_Interest','Creativity','Stress_Handling_Level','Stream']]
+inp1=df2[['Maths_Interest','Science_Interest','Business_Interest','Creativity','Stress_Handling_Level']]
 out1=df2['Stream']
 model1.fit(inp1,out1)
 st.header("Preference level")
