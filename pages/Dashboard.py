@@ -4,6 +4,7 @@ import os
 import time
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
+from sklearn.tree import DecisionTreeClassifier
 import base64
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -71,6 +72,9 @@ if st.button("Get Suggestion",use_container_width=True,type="primary"):
 # p1,a1=plt.subplots()
 # a1.pie(marks,labels=subject,colors=['red','green'],autopct="%1.0f%%",explode=[0.1,0.1,0],shadow=True)
 # st.pyplot(p1)
+user_mark_data=pd.read_csv('studentMarks.csv',encoding="latin-1")
+df1=pd.DataFrame(user_mark_data)
+st.write(df1)
 sub1=[]
 @st.dialog("User Input")
 def Userdetail():
