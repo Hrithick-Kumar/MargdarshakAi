@@ -73,7 +73,6 @@ if st.button("Get Suggestion",use_container_width=True,type="primary"):
 # p1,a1=plt.subplots()
 # a1.pie(marks,labels=subject,colors=['red','green'],autopct="%1.0f%%",explode=[0.1,0.1,0],shadow=True)
 # st.pyplot(p1)
-dataGroup={}
 st.write(dataGroup['Result'])
 user_mark_data=pd.read_csv('StudentMark.csv',encoding="latin-1")
 df1=pd.DataFrame(user_mark_data)
@@ -93,14 +92,8 @@ def Userdetail():
               mean=len(sub1)
        if st.button("Submit"):
               mean=int(sum / len(sub1))
-              predi=model.predict([[mean]])
-              data2=predi[0]        
+              predi=model.predict([[mean]])      
               st.write(f"According to marks you can choose \n{predi[0]}")
-              dataGroup={
-              'Result':[[data1],[data2]]
-              }       
-              st.write(dataGroup['Result'])
-              
 if st.button("User Input"):
        Userdetail()
 @st.dialog("Update photo")
