@@ -96,9 +96,9 @@ def Userdetail():
               predi=model.predict([[mean]])
               data2=predi[0]
               st.write(f"According to marks you can choose \n{predi[0]}")
+              st.write(data2)
 if st.button("User Input"):
        Userdetail()
-       st.write(data2)
 @st.dialog("Update photo")
 def updatePhoto():
        c1,c2=st.columns(2)
