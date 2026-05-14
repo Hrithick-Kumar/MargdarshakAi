@@ -92,7 +92,10 @@ if st.button("Submit"):
        data2=predi[0]
        st.write(f"According to marks you can choose \n{predi[0]}")
        Final={'Result':[data1,data2]}
-
+preference_data=pd.read_csv("Preference.csv")
+df2=pd.DataFrame(preference_data)
+X2=df[['Maths_Interest','Science_Interest','Business_Interest','Creativity','Stress_Handling_Level','Stream']]
+st.write(X2)
 st.header("Preference level")
 Maths_int=st.slider("Maths Interest",0,10)
 Sci_int=st.slider("Science Interest",0,10)
