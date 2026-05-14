@@ -76,8 +76,8 @@ df1=pd.DataFrame(user_mark_data)
 Final={}
 inp=df1[['Average']]
 out=df1['Stream']
-model=DecisionTreeClassifier()
-model.fit(inp,out)
+model1=DecisionTreeClassifier()
+model1.fit(inp,out)
 sub1=[]
 sum=0
 mean=0
@@ -96,7 +96,7 @@ preference_data=pd.read_csv("Preference.csv")
 df2=pd.DataFrame(preference_data)
 inp1=df2[['Maths_Interest','Science_Interest','Business_Interest','Creativity','Stress_Handling_Level','Stream']]
 out1=df2['Stream']
-model.fit(inp1,out1)
+model1.fit(inp1,out1)
 st.header("Preference level")
 Maths_Interest=st.slider("Maths Interest",0,10)
 Science_Interest=st.slider("Science Interest",0,10)
