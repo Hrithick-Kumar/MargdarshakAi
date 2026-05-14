@@ -92,7 +92,8 @@ if st.button("Submit"):
        data2=predi[0]
        st.write(f"According to marks you can choose \n{predi[0]}")
        Final={'Result':[data1,data2]}
-st.write(Final['Result'])
+st.write(Final)
+
 @st.dialog("Update photo")
 def updatePhoto():
        c1,c2=st.columns(2)
