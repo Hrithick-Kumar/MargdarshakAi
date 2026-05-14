@@ -99,7 +99,7 @@ def Userdetail():
               dataGroup={
               'Result':[[data1],[data2]]
               }       
-        st.write(dataGroup['Result'])
+              st.write(dataGroup['Result'])
               
 if st.button("User Input"):
        Userdetail()
