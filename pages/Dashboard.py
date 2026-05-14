@@ -75,7 +75,7 @@ if st.button("Get Suggestion",use_container_width=True,type="primary"):
 user_mark_data=pd.read_csv('StudentMark.csv',encoding="latin-1")
 df1=pd.DataFrame(user_mark_data)
 inp=df1['Average']
-out=df1[['Stream']]
+out=df1['Stream']
 model=DecisionTreeClassifier()
 model.fit(inp,out)
 
@@ -91,7 +91,7 @@ def Userdetail():
               mean=len(sub1)
        if st.button("Submit"):
               mean=int(sum / len(sub1))
-              predi=model.predict([[mean]])
+              predi=model.predict([mean])
               st.write(f"Mean is {predi}")
 if st.button("User Input"):
        Userdetail()
