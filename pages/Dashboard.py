@@ -103,14 +103,7 @@ Science_Interest=st.slider("Science Interest",0,10)
 Business_Interest=st.slider("Business Interest",0,10)
 Creativity=st.slider("Creativity",0,10)
 Stress_Handling_Level=st.slider("stress Handling level",0,10)
-int_data={
-       'Maths_Interest':Maths_Interest,
-       'Science_Interest':Science_Interest,
-       'Business_Interest':Business_Interest,
-       'Creativity':Creativity,
-       'Stress_Handling_Level':Stress_Handling_Level
-}
-preference_prediction=model1.predict([[int_data['Maths_Interest','Science_Interest','Business_Interest','Creativity','Stress_Handling_Level']]])
+preference_prediction=model1.predict([[Maths_Interest,Science_Interest,Business_Interest,Creativity,Stress_Handling_Level]])
 st.toast(preference_prediction)
 @st.dialog("Update photo")
 def updatePhoto():
