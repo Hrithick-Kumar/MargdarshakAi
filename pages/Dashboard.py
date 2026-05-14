@@ -94,7 +94,7 @@ def Userdetail():
               data2=predi[0]
               st.write(f"According to marks you can choose \n{predi[0]}")
               Final={'Result':[data1,data2]}
-              st.toast(Final['Result'])
+              st.toast(Final)
 if st.button("User Input"):
        Userdetail()
 @st.dialog("Update photo")
