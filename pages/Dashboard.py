@@ -10,7 +10,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 data1=""
-data2=""
 conn=MongoClient("mongodb+srv://StreamDecider:stream123@cluster0.fgaudsd.mongodb.net/?appName=Cluster0")
 db=conn["User"]
 coll=db["Info"]
@@ -74,18 +73,19 @@ if st.button("Get Suggestion",use_container_width=True,type="primary"):
 # p1,a1=plt.subplots()
 # a1.pie(marks,labels=subject,colors=['red','green'],autopct="%1.0f%%",explode=[0.1,0.1,0],shadow=True)
 # st.pyplot(p1)
-user_mark_data=pd.read_csv('StudentMark.csv',encoding="latin-1")
-df1=pd.DataFrame(user_mark_data)
-inp=df1[['Average']]
-out=df1['Stream']
-model=DecisionTreeClassifier()
-model.fit(inp,out)
 
 sub1=[]
+data2=""
 @st.dialog("User Input")
 def Userdetail():
        sum=0
        mean=0
+       user_mark_data=pd.read_csv('StudentMark.csv',encoding="latin-1")
+       df1=pd.DataFrame(user_mark_data)
+       inp=df1[['Average']]
+       out=df1['Stream']
+       model=DecisionTreeClassifier()
+       model.fit(inp,out)
        sub1=st.multiselect("Choose subjects of class 10th",['Maths','Science','Social Science','English','Hindi','Sanskrit','Computer'])
        for x in range(len(sub1)):
               marks=st.number_input(f"Enter marks in {sub1[x]}",value=0)
