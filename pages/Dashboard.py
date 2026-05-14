@@ -73,6 +73,7 @@ if st.button("Get Suggestion",use_container_width=True,type="primary"):
 # st.pyplot(p1)
 user_mark_data=pd.read_csv('StudentMark.csv',encoding="latin-1")
 df1=pd.DataFrame(user_mark_data)
+Final={}
 inp=df1[['Average']]
 out=df1['Stream']
 model=DecisionTreeClassifier()
