@@ -110,7 +110,7 @@ int_data={
        'Creativity':Creativity,
        'Stress_Handling_Level':Stress_Handling_Level
 }
-preference_prediction=model1.predict([[int_data]])
+preference_prediction=model1.predict([int_data['Maths_Interest','Science_Interest','Business_Interest','Creativity','Stress_Handling_Level']])
 st.toast(preference_prediction)
 @st.dialog("Update photo")
 def updatePhoto():
