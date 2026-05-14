@@ -8,8 +8,6 @@ from sklearn.tree import DecisionTreeClassifier
 import base64
 import pandas as pd
 import matplotlib.pyplot as plt
-
-data1=""
 conn=MongoClient("mongodb+srv://StreamDecider:stream123@cluster0.fgaudsd.mongodb.net/?appName=Cluster0")
 db=conn["User"]
 coll=db["Info"]
