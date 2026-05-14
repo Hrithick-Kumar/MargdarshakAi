@@ -75,7 +75,7 @@ if st.button("Get Suggestion",use_container_width=True,type="primary"):
 # st.pyplot(p1)
 
 sub1=[]
-data2=""
+predi=""
 @st.dialog("User Input")
 def Userdetail():
        sum=0
@@ -96,7 +96,7 @@ def Userdetail():
               predi=model.predict([[mean]])
               data2=predi[0]
               st.write(f"According to marks you can choose \n{predi[0]}")
-st.write(data2)
+       st.toast(predi)
 if st.button("User Input"):
        Userdetail()
 @st.dialog("Update photo")
