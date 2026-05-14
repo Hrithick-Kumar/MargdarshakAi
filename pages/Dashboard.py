@@ -9,7 +9,8 @@ import base64
 import pandas as pd
 import matplotlib.pyplot as plt
 
-data1,data2=""
+data1=""
+data2=""
 conn=MongoClient("mongodb+srv://StreamDecider:stream123@cluster0.fgaudsd.mongodb.net/?appName=Cluster0")
 db=conn["User"]
 coll=db["Info"]
