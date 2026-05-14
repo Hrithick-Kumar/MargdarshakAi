@@ -96,7 +96,7 @@ def Userdetail():
               predi=model.predict([[mean]])
               data2=predi[0]
               st.write(f"According to marks you can choose \n{predi[0]}")
-              st.write(data2)
+st.write(data2)
 if st.button("User Input"):
        Userdetail()
 @st.dialog("Update photo")
@@ -149,7 +149,4 @@ with st.sidebar:
        if st.button("SignOut",use_container_width=True):
               st.session_state.clear()
               st.switch_page("MargdarshakAi.py")
-dataGroup={
-       'Result':[[data1],[data2]]
-}
-st.write(dataGroup['Result'])
+
