@@ -9,7 +9,7 @@ import base64
 import pandas as pd
 import matplotlib.pyplot as plt
 
-
+data1,data2=""
 conn=MongoClient("mongodb+srv://StreamDecider:stream123@cluster0.fgaudsd.mongodb.net/?appName=Cluster0")
 db=conn["User"]
 coll=db["Info"]
@@ -58,6 +58,7 @@ model.fit(X_input,y)
 userInput=st.text_area("")
 user_mess=vc.transform([userInput])
 prediction=model.predict(user_mess)
+data1=prediction[0]
 @st.dialog("MargdarshakAi Suggestion")
 def suggestion():
        st.write(f"According to your goal we suggest you to choose----> {prediction[0]}")
@@ -92,7 +93,8 @@ def Userdetail():
        if st.button("Submit"):
               mean=int(sum / len(sub1))
               predi=model.predict([[mean]])
-              st.write(f"Mean is {predi}")
+              data2=predi[0]
+              st.write(f"According to marks you can choose \n{predi[0]}")
 if st.button("User Input"):
        Userdetail()
 @st.dialog("Update photo")
@@ -145,5 +147,7 @@ with st.sidebar:
        if st.button("SignOut",use_container_width=True):
               st.session_state.clear()
               st.switch_page("MargdarshakAi.py")
-
-
+dataGroup={
+       'Result':[[data1],[data2]]
+}
+st.write(dataGroup['Result'])
