@@ -110,9 +110,8 @@ int_data={
        'Creativity':Creativity,
        'Stress_Handling_Level':Stress_Handling_Level
 }
-#preference_prediction=model.predict([[10,9,5,4,6]])
-#st.toast(preference_prediction)
-st.write(int_data)
+preference_prediction=model.predict([[int_data]])
+st.toast(preference_prediction)
 @st.dialog("Update photo")
 def updatePhoto():
        c1,c2=st.columns(2)
