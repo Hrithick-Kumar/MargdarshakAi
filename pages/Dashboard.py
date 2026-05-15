@@ -111,7 +111,7 @@ Stress_Handling_Level=st.slider("stress Handling level",0,10)
 preference_prediction=model2.predict([[Maths_Interest,Science_Interest,Business_Interest,Creativity,Stress_Handling_Level]])
 data3=preference_prediction[0]
 if 'data2' not in st.session_state:
-       pass
+       st.toast("hii")
 data2=st.session_state['data2']
 if st.button("Analyse"):
        st.toast(preference_prediction)
