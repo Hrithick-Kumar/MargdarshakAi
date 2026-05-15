@@ -5,6 +5,9 @@ import time
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier 
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 import base64
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -76,8 +79,9 @@ df1=pd.DataFrame(user_mark_data)
 Final={}
 inp=df1[['Average']]
 out=df1['Stream']
-model1=DecisionTreeClassifier()
-model1.fit(inp,out)
+X_train,X_test,y_train,y_test=train_test_split(inp,out,test_size=0.2,random_state=42)
+model1=RandomForestClassifier()
+model1.fit(X_train,y_train)
 sub1=[]
 sum=0
 mean=0
@@ -89,22 +93,28 @@ for x in range(len(sub1)):
 if st.button("Submit"):
        mean=int(sum / len(sub1))
        predi=model.predict([[mean]])  
+       accuracy=accuracy_score(y_test,predi)
        data2=predi[0]
        st.write(f"According to marks you can choose \n{predi[0]}")
+       st.write(f"Accuracy : {accuracy}")
        Final={'Result':[data1,data2]}
 preference_data=pd.read_csv("Preference.csv")
 df2=pd.DataFrame(preference_data)
 inp1=df2[['Maths_Interest','Science_Interest','Business_Interest','Creativity','Stress_Handling_Level']]
 out1=df2['Stream']
-model1.fit(inp1,out1)
+X1_train,X1_test,y1_train,y1_test=train_test_split(inp1,out1,test_size=0.2,random_state=42)
+model2=RandomForestClassifier()
+model2.fit(X1_train,y1_train)
 st.header("Preference level")
 Maths_Interest=st.slider("Maths Interest",0,10)
 Science_Interest=st.slider("Science Interest",0,10)
 Business_Interest=st.slider("Business Interest",0,10)
 Creativity=st.slider("Creativity",0,10)
 Stress_Handling_Level=st.slider("stress Handling level",0,10)
-preference_prediction=model1.predict([[Maths_Interest,Science_Interest,Business_Interest,Creativity,Stress_Handling_Level]])
-st.toast(preference_prediction)
+preference_prediction=model2.predict([[Maths_Interest,Science_Interest,Business_Interest,Creativity,Stress_Handling_Level]])
+if st.button("predict"):
+       st.write(f"Accuracy : {accuracy}")
+       st.toast(preference_prediction)
 @st.dialog("Update photo")
 def updatePhoto():
        c1,c2=st.columns(2)
