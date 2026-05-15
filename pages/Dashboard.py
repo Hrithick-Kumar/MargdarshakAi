@@ -92,8 +92,8 @@ for x in range(len(sub1)):
        mean=len(sub1)
 if st.button("Submit"):
        mean=int(sum / len(sub1))
-       predi=model1.predict([[mean]])  
-       st.write(f"According to marks you can choose \n{predi[0]}")
+predi=model1.predict([[mean]])  
+st.write(f"According to marks you can choose \n{predi[0]}")
 preference_data=pd.read_csv("Preference.csv")
 df2=pd.DataFrame(preference_data)
 inp1=df2[['Maths_Interest','Science_Interest','Business_Interest','Creativity','Stress_Handling_Level']]
