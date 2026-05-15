@@ -93,7 +93,7 @@ for x in range(len(sub1)):
 if st.button("Submit"):
        mean=int(sum / len(sub1))
        predi=model1.predict([[mean]])  
-       accuracy=accuracy_score(y_test,predi)
+       #accuracy=accuracy_score(y_test,predi)
        data2=predi[0]
        st.write(f"According to marks you can choose \n{predi[0]}")
        st.write(f"Accuracy : {accuracy}")
