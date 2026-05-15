@@ -93,6 +93,7 @@ for x in range(len(sub1)):
 if st.button("Submit"):
        mean=int(sum / len(sub1))
 predi=model1.predict([[mean]])  
+data2=predi[0]
 st.write(f"According to marks you can choose \n{predi[0]}")
 preference_data=pd.read_csv("Preference.csv")
 df2=pd.DataFrame(preference_data)
