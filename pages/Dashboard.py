@@ -79,7 +79,7 @@ df1=pd.DataFrame(user_mark_data)
 Final={}
 inp=df1[['Average']]
 out=df1['Stream']
-X_train,X_test,y_train,y_test=train_test_split(inp,out,test_size=0.2,random_state=42)
+X_train,X_test,y_train,y_test=train_test_split(inp,out,test_size=0.2)
 model1=RandomForestClassifier()
 model1.fit(X_train,y_train)
 sub1=[]
@@ -93,10 +93,10 @@ for x in range(len(sub1)):
 if st.button("Submit"):
        mean=int(sum / len(sub1))
        predi=model1.predict([[mean]])  
-       #accuracy=accuracy_score(y_test,predi)
+       accuracy=accuracy_score(y_test,predi)
        data2=predi[0]
        st.write(f"According to marks you can choose \n{predi[0]}")
-       #st.write(f"Accuracy : {accuracy}")
+       st.write(f"Accuracy : {accuracy}")
        Final={'Result':[data1,data2]}
 preference_data=pd.read_csv("Preference.csv")
 df2=pd.DataFrame(preference_data)
