@@ -93,7 +93,6 @@ for x in range(len(sub1)):
 if st.button("Submit"):
        mean=int(sum / len(sub1))
        predi=model1.predict([[mean]])  
-       st.session_state['data2']=predi[0]
        st.write(f"According to marks you can choose \n{predi[0]}")
 preference_data=pd.read_csv("Preference.csv")
 df2=pd.DataFrame(preference_data)
@@ -110,9 +109,6 @@ Creativity=st.slider("Creativity",0,10)
 Stress_Handling_Level=st.slider("stress Handling level",0,10)
 preference_prediction=model2.predict([[Maths_Interest,Science_Interest,Business_Interest,Creativity,Stress_Handling_Level]])
 data3=preference_prediction[0]
-if 'data2' not in st.session_state:
-       st.toast("hii")
-data2=st.session_state['data2']
 if st.button("Analyse"):
        st.toast(preference_prediction)
        Final={'Result':[data1,data2,data3]}
