@@ -112,9 +112,9 @@ Business_Interest=st.slider("Business Interest",0,10)
 Creativity=st.slider("Creativity",0,10)
 Stress_Handling_Level=st.slider("stress Handling level",0,10)
 preference_prediction=model2.predict([[Maths_Interest,Science_Interest,Business_Interest,Creativity,Stress_Handling_Level]])
-accuracy1=accuracy_score(y_test,preference_prediction)
+accuracy=accuracy_score(y_test,preference_prediction)
 if st.button("predict"):
-       st.write(f"Accuracy : {accuracy1}")
+       st.write(f"Accuracy : {accuracy}")
        st.toast(preference_prediction)
 @st.dialog("Update photo")
 def updatePhoto():
