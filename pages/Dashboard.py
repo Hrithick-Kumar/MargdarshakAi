@@ -82,11 +82,10 @@ out=df1['Stream']
 X_train,X_test,y_train,y_test=train_test_split(inp,out,test_size=0.2)
 model1=RandomForestClassifier()
 model1.fit(X_train,y_train)
-test_pred=model1.predict(X_test)
-accuracy=accuracy_score(y_test,test_pred)
 sub1=[]
 sum=0
 mean=0
+data2=""
 sub1=st.multiselect("Choose subjects of class 10th",['Maths','Science','Social Science','English','Hindi','Sanskrit','Computer'])
 for x in range(len(sub1)):
        marks=st.number_input(f"Enter marks in {sub1[x]}",value=0)
@@ -97,8 +96,6 @@ if st.button("Submit"):
        predi=model1.predict([[mean]])  
        data2=predi[0]
        st.write(f"According to marks you can choose \n{predi[0]}")
-       st.write(f"Accuracy : {accuracy}")
-       Final={'Result':[data1,data2]}
 preference_data=pd.read_csv("Preference.csv")
 df2=pd.DataFrame(preference_data)
 inp1=df2[['Maths_Interest','Science_Interest','Business_Interest','Creativity','Stress_Handling_Level']]
@@ -106,8 +103,6 @@ out1=df2['Stream']
 X_train,X_test,y_train,y_test=train_test_split(inp1,out1,test_size=0.2,random_state=42)
 model2=RandomForestClassifier()
 model2.fit(X_train,y_train)
-test_pred=model2.predict(X_test)
-accuracy=accuracy_score(y_test,test_pred)
 st.header("Preference level")
 Maths_Interest=st.slider("Maths Interest",0,10)
 Science_Interest=st.slider("Science Interest",0,10)
@@ -115,10 +110,11 @@ Business_Interest=st.slider("Business Interest",0,10)
 Creativity=st.slider("Creativity",0,10)
 Stress_Handling_Level=st.slider("stress Handling level",0,10)
 preference_prediction=model2.predict([[Maths_Interest,Science_Interest,Business_Interest,Creativity,Stress_Handling_Level]])
-#accuracy=accuracy_score(y_test,preference_prediction)
-if st.button("predict"):
-       st.write(f"Accuracy : {accuracy}")
+data3=preference_prediction[0]
+if st.button("Analyse"):
        st.toast(preference_prediction)
+       Final={'Result':[data1,data2,data3]}
+       st.write(Final)
 @st.dialog("Update photo")
 def updatePhoto():
        c1,c2=st.columns(2)
