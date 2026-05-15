@@ -96,7 +96,7 @@ if st.button("Submit"):
        #accuracy=accuracy_score(y_test,predi)
        data2=predi[0]
        st.write(f"According to marks you can choose \n{predi[0]}")
-       st.write(f"Accuracy : {accuracy}")
+       #st.write(f"Accuracy : {accuracy}")
        Final={'Result':[data1,data2]}
 preference_data=pd.read_csv("Preference.csv")
 df2=pd.DataFrame(preference_data)
