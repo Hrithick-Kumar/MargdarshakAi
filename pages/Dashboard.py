@@ -82,6 +82,8 @@ out=df1['Stream']
 X_train,X_test,y_train,y_test=train_test_split(inp,out,test_size=0.2)
 model1=RandomForestClassifier()
 model1.fit(X_train,y_train)
+test_pred=model1.predict(X_test)
+accuracy=accuracy_score(y_test,test_pred)
 sub1=[]
 sum=0
 mean=0
@@ -93,7 +95,6 @@ for x in range(len(sub1)):
 if st.button("Submit"):
        mean=int(sum / len(sub1))
        predi=model1.predict([[mean]])  
-       accuracy=accuracy_score(y_test,predi)
        data2=predi[0]
        st.write(f"According to marks you can choose \n{predi[0]}")
        st.write(f"Accuracy : {accuracy}")
@@ -105,6 +106,8 @@ out1=df2['Stream']
 X_train,X_test,y_train,y_test=train_test_split(inp1,out1,test_size=0.2,random_state=42)
 model2=RandomForestClassifier()
 model2.fit(X_train,y_train)
+test_pred=model2.predict(X_test)
+accuracy=accuracy_score(y_test,test_pred)
 st.header("Preference level")
 Maths_Interest=st.slider("Maths Interest",0,10)
 Science_Interest=st.slider("Science Interest",0,10)
@@ -114,7 +117,7 @@ Stress_Handling_Level=st.slider("stress Handling level",0,10)
 preference_prediction=model2.predict([[Maths_Interest,Science_Interest,Business_Interest,Creativity,Stress_Handling_Level]])
 #accuracy=accuracy_score(y_test,preference_prediction)
 if st.button("predict"):
-       #st.write(f"Accuracy : {accuracy}")
+       st.write(f"Accuracy : {accuracy}")
        st.toast(preference_prediction)
 @st.dialog("Update photo")
 def updatePhoto():
