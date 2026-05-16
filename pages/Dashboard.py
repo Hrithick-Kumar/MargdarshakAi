@@ -1,5 +1,6 @@
 import streamlit as st
 from pymongo import MongoClient
+from collection import counter
 import os
 import time
 from sklearn.preprocessing import OneHotEncoder
@@ -113,6 +114,9 @@ if st.button("Submit"):
        data2=predi[0]
        st.write(f"According to marks you can choose \n{predi[0]}")
        Final={'Result':[data1,data2,data3]}
+       result_list=Final['Result']
+       final_prediction=Counter(result_list).most_common(1)[0][0]
+       st.success(f"Final Recommended Stream: {final_prediction}")
        st.write(Final)
 
 @st.dialog("Update photo")
