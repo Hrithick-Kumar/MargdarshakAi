@@ -74,30 +74,7 @@ if st.button("Get Suggestion",use_container_width=True,type="primary"):
 # p1,a1=plt.subplots()
 # a1.pie(marks,labels=subject,colors=['red','green'],autopct="%1.0f%%",explode=[0.1,0.1,0],shadow=True)
 # st.pyplot(p1)
-user_mark_data=pd.read_csv('StudentMark.csv',encoding="latin-1")
-df1=pd.DataFrame(user_mark_data)
-Final={}
-inp=df1[['Average']]
-out=df1['Stream']
-X_train,X_test,y_train,y_test=train_test_split(inp,out,test_size=0.2)
-model1=RandomForestClassifier()
-model1.fit(X_train,y_train)
-sub1=[]
-sum=0
-mean=0
-data4=""
-sub1=st.multiselect("Choose subjects of class 10th",['Maths','Science','Social Science','English','Hindi','Sanskrit','Computer'])
-for x in range(len(sub1)):
-       marks=st.number_input(f"Enter marks in {sub1[x]}",value=0)
-       sum=sum+marks
-       mean=len(sub1)
-if st.button("Submit"):
-       mean=int(sum / len(sub1))
-       predi=model1.predict([[mean]])
-       data2=predi[0]
-       data4=data2
-st.toast(data4)
-st.write(f"According to marks you can choose \n{predi[0]}")
+
 preference_data=pd.read_csv("Preference.csv")
 df2=pd.DataFrame(preference_data)
 inp1=df2[['Maths_Interest','Science_Interest','Business_Interest','Creativity','Stress_Handling_Level']]
@@ -115,6 +92,28 @@ preference_prediction=model2.predict([[Maths_Interest,Science_Interest,Business_
 data3=preference_prediction[0]
 if st.button("Analyse"):
        st.toast(preference_prediction)
+  
+user_mark_data=pd.read_csv('StudentMark.csv',encoding="latin-1")
+df1=pd.DataFrame(user_mark_data)
+Final={}
+inp=df1[['Average']]
+out=df1['Stream']
+X_train,X_test,y_train,y_test=train_test_split(inp,out,test_size=0.2)
+model1=RandomForestClassifier()
+model1.fit(X_train,y_train)
+sub1=[]
+sum=0
+mean=0
+sub1=st.multiselect("Choose subjects of class 10th",['Maths','Science','Social Science','English','Hindi','Sanskrit','Computer'])
+for x in range(len(sub1)):
+       marks=st.number_input(f"Enter marks in {sub1[x]}",value=0)
+       sum=sum+marks
+       mean=len(sub1)
+if st.button("Submit"):
+       mean=int(sum / len(sub1))
+       predi=model1.predict([[mean]])
+       data2=predi[0]
+       st.write(f"According to marks you can choose \n{predi[0]}")
        Final={'Result':[data1,data2,data3]}
        st.write(Final)
 @st.dialog("Update photo")
