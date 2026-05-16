@@ -85,6 +85,7 @@ model1.fit(X_train,y_train)
 sub1=[]
 sum=0
 mean=0
+data4=""
 sub1=st.multiselect("Choose subjects of class 10th",['Maths','Science','Social Science','English','Hindi','Sanskrit','Computer'])
 for x in range(len(sub1)):
        marks=st.number_input(f"Enter marks in {sub1[x]}",value=0)
@@ -92,9 +93,10 @@ for x in range(len(sub1)):
        mean=len(sub1)
 if st.button("Submit"):
        mean=int(sum / len(sub1))
-st.toast(mean)
-predi=model1.predict([[mean]])
-data2=predi[0]
+       predi=model1.predict([[mean]])
+       data2=predi[0]
+       data4=data2
+st.toast(data4)
 st.write(f"According to marks you can choose \n{predi[0]}")
 preference_data=pd.read_csv("Preference.csv")
 df2=pd.DataFrame(preference_data)
