@@ -109,7 +109,7 @@ for x in range(len(sub1)):
        marks=st.number_input(f"Enter marks in {sub1[x]}",value=0)
        mark_list.append(marks)
 if st.button("Submit"):
-       predi=model1.predict([[mark_list]])
+       predi=model1.predict([mark_list])
        data2=predi[0]
        st.write(f"According to marks you can choose \n{predi[0]}")
        Final={'Result':[data1,data2,data3]}
