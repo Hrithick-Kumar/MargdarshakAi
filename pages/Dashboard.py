@@ -119,6 +119,8 @@ if st.button("Submit"):
       # st.write(Final)
        final_list=pd.read_csv("Final.csv")
        df2=pd.DataFrame(final_list)
+       st.write(df2)
+
        
        st.write(result)
 @st.dialog("Update photo")
