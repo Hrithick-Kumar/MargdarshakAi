@@ -121,8 +121,6 @@ if st.button("Submit"):
        df2=pd.DataFrame(final_list)
        st.write(df2)
 
-       
-       st.write(result)
 @st.dialog("Update photo")
 def updatePhoto():
        c1,c2=st.columns(2)
