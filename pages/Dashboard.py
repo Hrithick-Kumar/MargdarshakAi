@@ -97,12 +97,12 @@ if st.button("Predict"):
        else:
               predi=model1.predict([mark_list])
               data2=predi[0]
-              st.write(f"According to marks you can choose \n{predi[0]}")
               Final={'Result':[data1,data2,data3]}
               result_list=Final['Result']
               final_prediction=Counter(result_list).most_common(1)[0][0]
               st.success(f"Final Recommended Stream: {final_prediction}")
-              st.write(Final)
+              st.toast(f"Final Recommended Stream: {final_prediction}")
+              
 
 @st.dialog("Update photo")
 def updatePhoto():
