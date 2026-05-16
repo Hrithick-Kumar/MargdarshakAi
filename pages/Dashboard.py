@@ -84,7 +84,6 @@ model1=RandomForestClassifier()
 model1.fit(X_train,y_train)
 sub1=[]
 sum=0
-predi[0]=""
 sub1=st.multiselect("Choose subjects of class 10th",['Maths','Science','Social Science','English','Hindi','Sanskrit','Computer'])
 for x in range(len(sub1)):
        marks=st.number_input(f"Enter marks in {sub1[x]}",value=0)
@@ -92,7 +91,7 @@ for x in range(len(sub1)):
        mean=len(sub1)
 if st.button("Submit"):
        mean=int(sum / len(sub1))
-       predi=model1.predict([[mean]]) 
+predi=model1.predict([[mean]])
 data2=predi[0]
 st.write(f"According to marks you can choose \n{predi[0]}")
 preference_data=pd.read_csv("Preference.csv")
