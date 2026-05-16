@@ -2,6 +2,7 @@ import streamlit as st
 from pymongo import MongoClient
 import os
 import time
+from sklearn.preprocessing import OneHotEncoder
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.tree import DecisionTreeClassifier
@@ -115,7 +116,10 @@ if st.button("Submit"):
        data2=predi[0]
        st.write(f"According to marks you can choose \n{predi[0]}")
        Final={'Result':[data1,data2,data3]}
-       st.write(Final)
+      # st.write(Final)
+       encoder = OneHotEncoder(sparse_output=False)
+       result = encoder.fit_transform(Final)
+       st.write(result)
 @st.dialog("Update photo")
 def updatePhoto():
        c1,c2=st.columns(2)
