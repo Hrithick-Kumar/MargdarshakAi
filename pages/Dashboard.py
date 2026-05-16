@@ -63,20 +63,11 @@ user_mess=vc.transform([userInput])
 prediction=model.predict(user_mess)
 data1=prediction[0]
 @st.dialog("MargdarshakAi Suggestion")
-def suggestion():
-       st.write(f"According to your goal we suggest you to choose----> {prediction[0]}")
-
-if st.button("Get Suggestion",use_container_width=True,type="primary"):
-       if userInput=="":
-              st.toast("Please tell us about your goals")
-       else:
-              suggestion()
 # subject=['English','Maths','Science']
 # marks=[34,56,78]
 # p1,a1=plt.subplots()
 # a1.pie(marks,labels=subject,colors=['red','green'],autopct="%1.0f%%",explode=[0.1,0.1,0],shadow=True)
 # st.pyplot(p1)
-
 preference_data=pd.read_csv("Preference.csv")
 df2=pd.DataFrame(preference_data)
 inp1=df2[['Maths_Interest','Science_Interest','Business_Interest','Creativity','Stress_Handling_Level']]
@@ -91,10 +82,7 @@ Business_Interest=st.slider("Business Interest",0,10)
 Creativity=st.slider("Creativity",0,10)
 Stress_Handling_Level=st.slider("stress Handling level",0,10)
 preference_prediction=model2.predict([[Maths_Interest,Science_Interest,Business_Interest,Creativity,Stress_Handling_Level]])
-data3=preference_prediction[0]
-if st.button("Analyse"):
-       st.toast(preference_prediction)
-  
+data3=preference_prediction[0] 
 user_mark_data=pd.read_csv('StudentMark.csv',encoding="latin-1")
 df1=pd.DataFrame(user_mark_data)
 Final={}
@@ -109,15 +97,18 @@ sub1=st.multiselect("Choose Subject in sequence",['Maths','Science','Social Scie
 for x in range(len(sub1)):
        marks=st.number_input(f"Enter marks in {sub1[x]}",value=0)
        mark_list.append(marks)
-if st.button("Submit"):
-       predi=model1.predict([mark_list])
-       data2=predi[0]
-       st.write(f"According to marks you can choose \n{predi[0]}")
-       Final={'Result':[data1,data2,data3]}
-       result_list=Final['Result']
-       final_prediction=Counter(result_list).most_common(1)[0][0]
-       st.success(f"Final Recommended Stream: {final_prediction}")
-       st.write(Final)
+if st.button("Predict"):
+       if userInput=="" and mark_list==[]:
+              st.toast("Fill the detail properly")
+       else:
+              predi=model1.predict([mark_list])
+              data2=predi[0]
+              st.write(f"According to marks you can choose \n{predi[0]}")
+              Final={'Result':[data1,data2,data3]}
+              result_list=Final['Result']
+              final_prediction=Counter(result_list).most_common(1)[0][0]
+              st.success(f"Final Recommended Stream: {final_prediction}")
+              st.write(Final)
 
 @st.dialog("Update photo")
 def updatePhoto():
