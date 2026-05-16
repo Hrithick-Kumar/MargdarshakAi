@@ -94,6 +94,8 @@ for x in range(len(sub1)):
 if st.button("Predict"):
        if userInput=="" and mark_list==[]:
               st.toast("Fill the detail properly")
+       elif len(mark_list)!=4:
+              st.toast("Select all subject")
        else:
               predi=model1.predict([mark_list])
               data2=predi[0]
