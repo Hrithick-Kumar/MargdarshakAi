@@ -92,6 +92,7 @@ for x in range(len(sub1)):
        mean=len(sub1)
 if st.button("Submit"):
        mean=int(sum / len(sub1))
+st.toast(mean)
 predi=model1.predict([[mean]])
 data2=predi[0]
 st.write(f"According to marks you can choose \n{predi[0]}")
