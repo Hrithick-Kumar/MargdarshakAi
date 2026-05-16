@@ -116,13 +116,7 @@ if st.button("Submit"):
        data2=predi[0]
        st.write(f"According to marks you can choose \n{predi[0]}")
        Final={'Result':[data1,data2,data3]}
-      # st.write(Final)
-       final_list=pd.read_csv("Final.csv")
-       df2=pd.DataFrame(final_list)
-       st.write(df2)
-       encoder=OneHotEncoder(sparse_output=False)
-       re=encoder.fit_transform(Final)
-       st.write(re)
+       st.write(Final)
 
 @st.dialog("Update photo")
 def updatePhoto():
