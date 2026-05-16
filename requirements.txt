@@ -2,4 +2,3 @@ streamlit
 pymongo
 scikit-learn
 matplotlib
-collections
