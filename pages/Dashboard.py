@@ -1,6 +1,6 @@
 import streamlit as st
 from pymongo import MongoClient
-from collections import counter
+from collections import Counter
 import os
 import time
 from sklearn.preprocessing import OneHotEncoder
