@@ -120,6 +120,9 @@ if st.button("Submit"):
        final_list=pd.read_csv("Final.csv")
        df2=pd.DataFrame(final_list)
        st.write(df2)
+       encoder=OneHotEncoder(sparse_output=False)
+       re=encoder.fit_transform(Final)
+       st.write(re)
 
 @st.dialog("Update photo")
 def updatePhoto():
