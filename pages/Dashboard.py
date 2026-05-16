@@ -97,22 +97,19 @@ if st.button("Analyse"):
 user_mark_data=pd.read_csv('StudentMark.csv',encoding="latin-1")
 df1=pd.DataFrame(user_mark_data)
 Final={}
-inp=df1[['Average']]
+inp=df1[['Maths','Science','Social Science','English']]
 out=df1['Stream']
 X_train,X_test,y_train,y_test=train_test_split(inp,out,test_size=0.2)
 model1=RandomForestClassifier()
 model1.fit(X_train,y_train)
 sub1=[]
-sum=0
-mean=0
-sub1=st.multiselect("Choose subjects of class 10th",['Maths','Science','Social Science','English','Hindi','Sanskrit','Computer'])
+mark_list=[]
+sub1=st.multiselect("Choose Subject in sequence",['Maths','Science','Social Science','English'])
 for x in range(len(sub1)):
        marks=st.number_input(f"Enter marks in {sub1[x]}",value=0)
-       sum=sum+marks
-       mean=len(sub1)
+       mark_list.append(marks)
 if st.button("Submit"):
-       mean=int(sum / len(sub1))
-       predi=model1.predict([[mean]])
+       predi=model1.predict([[mark_list]])
        data2=predi[0]
        st.write(f"According to marks you can choose \n{predi[0]}")
        Final={'Result':[data1,data2,data3]}
