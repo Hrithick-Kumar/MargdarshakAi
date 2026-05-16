@@ -62,12 +62,6 @@ userInput=st.text_area("")
 user_mess=vc.transform([userInput])
 prediction=model.predict(user_mess)
 data1=prediction[0]
-@st.dialog("MargdarshakAi Suggestion")
-# subject=['English','Maths','Science']
-# marks=[34,56,78]
-# p1,a1=plt.subplots()
-# a1.pie(marks,labels=subject,colors=['red','green'],autopct="%1.0f%%",explode=[0.1,0.1,0],shadow=True)
-# st.pyplot(p1)
 preference_data=pd.read_csv("Preference.csv")
 df2=pd.DataFrame(preference_data)
 inp1=df2[['Maths_Interest','Science_Interest','Business_Interest','Creativity','Stress_Handling_Level']]
