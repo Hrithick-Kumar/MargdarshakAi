@@ -84,7 +84,7 @@ model1=RandomForestClassifier()
 model1.fit(X_train,y_train)
 sub1=[]
 sum=0
-data2=""
+predi=""
 sub1=st.multiselect("Choose subjects of class 10th",['Maths','Science','Social Science','English','Hindi','Sanskrit','Computer'])
 for x in range(len(sub1)):
        marks=st.number_input(f"Enter marks in {sub1[x]}",value=0)
