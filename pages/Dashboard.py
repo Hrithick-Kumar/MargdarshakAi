@@ -105,7 +105,7 @@ if st.button("Predict"):
               final_prediction=Counter(result_list).most_common(1)[0][0]
               st.success(f"Final Recommended Stream: {final_prediction}")
               st.toast(f"Final Recommended Stream: {final_prediction}")
-              streamch=st.session_state['final_prediction']
+              final_prediction=st.session_state['streamch']
 @st.dialog("Visual Representation")
 def visual():
        st.write(streamch)
