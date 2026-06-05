@@ -1,7 +1,6 @@
 import streamlit as st
 from pymongo import MongoClient
 from collections import Counter
-import matplotlib.pyplot as plt
 import os
 import time
 from sklearn.preprocessing import OneHotEncoder
