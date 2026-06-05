@@ -46,11 +46,6 @@ def add_bg(image_file):
 add_bg("background_img/bg.png")
 pasd=""
 @st.dialog("Visual Representation")
-def visual():
-       st.alert("hello")
-    
-
-
 
 st.markdown(f"""
 <h6 style="color:#1A2421;font-size:23px;box-shadow:#1A2421 10px 10px 46px;box-shadow:#1A2421 10px 15px 26px;border-radius:30px;padding:10px 50px;">Explore your potential, discover your strengths, and make smarter academic decisions with Margdarshak AI.</h6><br><br>
@@ -94,6 +89,7 @@ model1=RandomForestClassifier()
 model1.fit(X_train,y_train)
 sub1=[]
 mark_list=[]
+streamch=""
 sub1=st.multiselect("Choose Subject in sequence",['Maths','Science','Social Science','English'])
 for x in range(len(sub1)):
        marks=st.number_input(f"Enter marks in {sub1[x]}",value=0)
@@ -111,6 +107,11 @@ if st.button("Predict"):
               final_prediction=Counter(result_list).most_common(1)[0][0]
               st.success(f"Final Recommended Stream: {final_prediction}")
               st.toast(f"Final Recommended Stream: {final_prediction}")
+              streamch=final_prediction
+@st.dialog("Visual Representation")
+def visual():
+       st.write(streamch)
+
 if st.button("Visual"):
                      visual()              
 
