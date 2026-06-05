@@ -56,7 +56,7 @@ vc=CountVectorizer()
 X_input=vc.fit_transform(X)
 model=MultinomialNB()
 model.fit(X_input,y)
-#userInput=st.text_area("")
+userInput=st.text_area("")
 user_mess=vc.transform([userInput])
 prediction=model.predict(user_mess)
 data1=prediction[0]
