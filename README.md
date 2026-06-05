@@ -214,109 +214,7 @@ User
      ├── Pass
      ├── DOB
      └── Photo
-
----
-
-📊 ER Diagram
-
-+------------------+
-|      USER        |
-+------------------+
-| Name (PK)        |
-| Pass             |
-| DOB              |
-| Photo            |
-+------------------+
-         |
-         |
-         V
-+----------------------+
-| STREAM RECOMMENDER   |
-+----------------------+
-| Interest Analysis    |
-| Marks Analysis       |
-| Preference Analysis  |
-+----------------------+
-         |
-         V
-+----------------------+
-| RECOMMENDATION       |
-+----------------------+
-| Predicted Stream     |
-| Final Result         |
-+----------------------+
-
----
-
-🔄 DFD Level-0
-
-                +----------------+
-                |    Student     |
-                +----------------+
-                        |
-                        V
-            +------------------------+
-            |   Margdarshak AI       |
-            +------------------------+
-             |          |          |
-             V          V          V
-      Interest      Marks      Preferences
-      Analysis     Analysis      Analysis
-             \         |         /
-              \        |        /
-               \       |       /
-                V      V      V
-              +---------------+
-              | Recommendation|
-              |    Engine     |
-              +---------------+
-                      |
-                      V
-             Recommended Stream
-
----
-
-🔄 DFD Level-1
-
-Student Input
-      |
-      V
-+------------------+
-| Interest Model   |
-| Multinomial NB   |
-+------------------+
-      |
-      V
-Interest Stream
-      |
-      |
-+------------------+
-| Marks Model      |
-| Random Forest    |
-+------------------+
-      |
-      V
-Marks Stream
-      |
-      |
-+------------------+
-| Preference Model |
-| Random Forest    |
-+------------------+
-      |
-      V
-Preference Stream
-      |
-      V
-+------------------+
-| Majority Voting  |
-+------------------+
-      |
-      V
-Final Recommended Stream
-
----
-
+-----
 🔮 Future Enhancements
 
 - Support for Class 12 Students
@@ -330,16 +228,16 @@ Final Recommended Stream
 - Personalized Career Reports
 
 ---
-
-👨‍💻 Developer
+```
+#👨‍💻 Developer
 
 Hrithick Kumar
 
 Project Motto
 
-«"Guiding Students Towards the Right Future with Artificial Intelligence."»
+«"**Guiding Students Towards the Right Future with Artificial Intelligence.**"»
 
-Contact
+#Contact
 
 📧 Email: kumarhrithick369@gmail.com
 
@@ -347,6 +245,6 @@ Contact
 
 ---
 
-📜 License
+#📜 License
 
 This project is developed for educational and research purposes.
