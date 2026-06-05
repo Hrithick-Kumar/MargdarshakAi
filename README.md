@@ -1,8 +1,8 @@
-Margdarshak AI
+# Margdarshak AI
 
-📌 Overview
+## 📌 Overview
 
-Margdarshak AI is an AI-powered career and stream recommendation platform developed using Python, Machine Learning, MongoDB, and Streamlit.
+Margdarshak AI is an AI-powered career and stream recommendation platform developed using **Python**, **Machine Learning**, **MongoDB**, and **Streamlit**.
 
 The application helps students identify the most suitable academic stream based on:
 
@@ -12,27 +12,27 @@ The application helps students identify the most suitable academic stream based 
 - Skills and strengths
 - Career preferences
 
-Currently, the system is designed primarily for Class 10 students who are selecting their stream for higher secondary education. Future updates will expand support for Class 12 students, college recommendations, skill assessments, and advanced career guidance.
+Currently, the system is designed primarily for **Class 10 students** who are selecting their stream for higher secondary education. Future updates will expand support for **Class 12 students**, **college recommendations**, **skill assessments**, and **advanced career guidance**.
 
 ---
 
-🚀 Live Project
+## 🚀 Live Project
 
-https://margdarshakaii.streamlit.app/
+🔗 https://margdarshakaii.streamlit.app/
 
 ---
 
-🎯 Problem Statement
+## 🎯 Problem Statement
 
 Many students choose streams based on peer pressure, trends, or incomplete information. This often leads to confusion and dissatisfaction later in their academic journey.
 
-Margdarshak AI aims to solve this problem by providing data-driven and AI-assisted stream recommendations.
+**Margdarshak AI** aims to solve this problem by providing data-driven and AI-assisted stream recommendations.
 
 ---
 
-✨ Features
+## ✨ Features
 
-User Management
+### 👤 User Management
 
 - User Registration
 - Secure Login System
@@ -40,39 +40,39 @@ User Management
 - Password Update
 - Profile Photo Upload
 
-AI-Based Stream Recommendation
+### 🤖 AI-Based Stream Recommendation
 
 The recommendation system uses three independent prediction models:
 
-1. Interest Analysis Model
+#### 1️⃣ Interest Analysis Model
 
 Analyzes the student's career goals and interests entered as text.
 
-Algorithm Used:
+**Algorithm Used:**
 
 - CountVectorizer
 - Multinomial Naive Bayes
 
 ---
 
-2. Academic Performance Model
+#### 2️⃣ Academic Performance Model
 
 Predicts suitable streams using subject-wise marks.
 
-Subjects Considered:
+**Subjects Considered:**
 
 - Mathematics
 - Science
 - Social Science
 - English
 
-Algorithm Used:
+**Algorithm Used:**
 
 - Random Forest Classifier
 
 ---
 
-3. Preference Analysis Model
+#### 3️⃣ Preference Analysis Model
 
 Evaluates:
 
@@ -82,18 +82,20 @@ Evaluates:
 - Creativity
 - Stress Handling Ability
 
-Algorithm Used:
+**Algorithm Used:**
 
 - Random Forest Classifier
 
 ---
 
-Final Recommendation Engine
+## 🧠 Final Recommendation Engine
 
-The final stream recommendation is generated using a majority voting system.
+The final stream recommendation is generated using a **Majority Voting System**.
 
+```text
 Final Recommendation =
 Most Common Prediction among:
+
 1. Interest Model
 2. Marks Model
 3. Preference Model
@@ -137,7 +139,7 @@ MargdarshakAI/
 │   └── Dashboard.py
 │
 ├── images/
-│   ├── user photos
+│   ├── user_photos/
 │   └── updateImg/
 │
 ├── background_img/
@@ -215,17 +217,117 @@ User
 
 ---
 
+📊 ER Diagram
+
++------------------+
+|      USER        |
++------------------+
+| Name (PK)        |
+| Pass             |
+| DOB              |
+| Photo            |
++------------------+
+         |
+         |
+         V
++----------------------+
+| STREAM RECOMMENDER   |
++----------------------+
+| Interest Analysis    |
+| Marks Analysis       |
+| Preference Analysis  |
++----------------------+
+         |
+         V
++----------------------+
+| RECOMMENDATION       |
++----------------------+
+| Predicted Stream     |
+| Final Result         |
++----------------------+
+
+---
+
+🔄 DFD Level-0
+
+                +----------------+
+                |    Student     |
+                +----------------+
+                        |
+                        V
+            +------------------------+
+            |   Margdarshak AI       |
+            +------------------------+
+             |          |          |
+             V          V          V
+      Interest      Marks      Preferences
+      Analysis     Analysis      Analysis
+             \         |         /
+              \        |        /
+               \       |       /
+                V      V      V
+              +---------------+
+              | Recommendation|
+              |    Engine     |
+              +---------------+
+                      |
+                      V
+             Recommended Stream
+
+---
+
+🔄 DFD Level-1
+
+Student Input
+      |
+      V
++------------------+
+| Interest Model   |
+| Multinomial NB   |
++------------------+
+      |
+      V
+Interest Stream
+      |
+      |
++------------------+
+| Marks Model      |
+| Random Forest    |
++------------------+
+      |
+      V
+Marks Stream
+      |
+      |
++------------------+
+| Preference Model |
+| Random Forest    |
++------------------+
+      |
+      V
+Preference Stream
+      |
+      V
++------------------+
+| Majority Voting  |
++------------------+
+      |
+      V
+Final Recommended Stream
+
+---
+
 🔮 Future Enhancements
 
-- Support for Class 12 students
-- Career Roadmaps
+- Support for Class 12 Students
 - College Recommendations
+- Career Roadmaps
+- AI Career Chatbot
 - Deep Learning Models
 - Skill Assessment Tests
-- AI Chat Assistant
-- Personalized Career Reports
 - Scholarship Suggestions
 - Resume Builder
+- Personalized Career Reports
 
 ---
 
@@ -235,13 +337,13 @@ Hrithick Kumar
 
 Project Motto
 
-"Guiding Students Towards the Right Future with Artificial Intelligence."
+«"Guiding Students Towards the Right Future with Artificial Intelligence."»
 
 Contact
 
-Email: kumarhrithick369@gmail.com
+📧 Email: kumarhrithick369@gmail.com
 
-GitHub: Hrithick-kumar
+💻 GitHub: Hrithick-kumar
 
 ---
 
