@@ -71,7 +71,7 @@ st.title("🎓 Margdarshak AI Dashboard")
 
 st.markdown(
     """
-    <div style='background:white;padding:20px;border-radius:15px;'>
+    <div style='background:rgba(25,25,25,0.8);padding:20px;border-radius:15px;'>
     <h3>Discover Your Ideal Career Path</h3>
     <p>
     Enter your goals, interests and academic performance.
