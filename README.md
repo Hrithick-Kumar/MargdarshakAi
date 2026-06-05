@@ -227,8 +227,6 @@ User
 - Resume Builder
 - Personalized Career Reports
 
----
-```
 ##👨‍💻 Developer
 
 Hrithick Kumar
