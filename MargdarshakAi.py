@@ -79,7 +79,6 @@ def profile():
        for x in coll.find({"Name":pro}):
               st.write(f"Username : {x["Name"]}")
               st.write(f"Password :XXX{x["Pass"][3:]}")
-              st.write(f"Address: {x['Address']}")
               st.write(f"DOB : {x["DOB"]}")
               st.session_state["img"]=f"{x['Photo']}"
               c1.image(f"images/{x['Photo']}",width=300)
@@ -164,7 +163,7 @@ def About():
 def contact():
    st.markdown("Phone Number:9431774516")
    st.markdown("Email:kumarhrithick369@gmail.com")
-   st.markdown("Github:hfhdfkjk")
+   st.markdown("Github:Hrithick-kumar")
 @st.dialog("Sign In")
 def SignIn():
     c1,c2=st.columns([6,1])
@@ -190,7 +189,6 @@ def SignUp():
     name=c1.text_input("User Name",width=350)
     Password=c1.text_input("Password",type="password",width=350)
     dob=c1.date_input("DOB",value=date.today(),min_value=min_date,max_value=max_date,width=350)
-    address=c2.text_area("Address",width=350)
     photo=c2.camera_input("Live Photo",width=350)
     count=random.randint(1,100)
     str1=""
@@ -200,16 +198,16 @@ def SignUp():
             bytes_data=photo.getbuffer()
             with open(filepath,"wb") as f:
                     f.write(bytes_data)
-            if st.button("SAVE") and name!="" and Password!="" and dob!="" and address!="" and str1!="":
+            if st.button("SAVE") and name!="" and Password!="" and dob!="" and str1!="":
                 if coll.find_one({"Name":name}) and coll.find_one({"Pass":Password}):
                     st.warning("Already Exist")
                 else:
-                    coll.insert_one({"Name":name,"Pass":Password,"Address":address,"DOB":str(dob),"Photo":str1})
+                    coll.insert_one({"Name":name,"Pass":Password,"DOB":str(dob),"Photo":str1})
                     st.toast("Successfully Registered")
                     time.sleep(2)
                     st.switch_page("MargdarshakAi.py")
             else:
-                if name=="" or Password=="" or address=="" or dob=="" or str1=="":
+                if name=="" or Password=="" or dob=="" or str1=="":
                     st.toast("Required field details")
 with st.sidebar:
     if st.button("Profile",use_container_width=True):
