@@ -1,6 +1,7 @@
 import streamlit as st
 from pymongo import MongoClient
 from collections import Counter
+import matplotlib.pyplot as plt
 import os
 import time
 from sklearn.preprocessing import OneHotEncoder
@@ -44,6 +45,12 @@ def add_bg(image_file):
     """, unsafe_allow_html=True)
 add_bg("background_img/bg.png")
 pasd=""
+@st.dialog("Visual Representation")
+def visual():
+       st.alert("hello")
+    
+
+
 
 st.markdown(f"""
 <h6 style="color:#1A2421;font-size:23px;box-shadow:#1A2421 10px 10px 46px;box-shadow:#1A2421 10px 15px 26px;border-radius:30px;padding:10px 50px;">Explore your potential, discover your strengths, and make smarter academic decisions with Margdarshak AI.</h6><br><br>
@@ -104,7 +111,8 @@ if st.button("Predict"):
               final_prediction=Counter(result_list).most_common(1)[0][0]
               st.success(f"Final Recommended Stream: {final_prediction}")
               st.toast(f"Final Recommended Stream: {final_prediction}")
-              
+              if st.button("Visual"):
+                     visual()
 
 @st.dialog("Update photo")
 def updatePhoto():
