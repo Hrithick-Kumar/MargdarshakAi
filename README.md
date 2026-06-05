@@ -1,79 +1,250 @@
-# Margdarshak AI
-## Demo Link
+Margdarshak AI
+
+📌 Overview
+
+Margdarshak AI is an AI-powered career and stream recommendation platform developed using Python, Machine Learning, MongoDB, and Streamlit.
+
+The application helps students identify the most suitable academic stream based on:
+
+- Academic performance
+- Subject-wise marks
+- Personal interests
+- Skills and strengths
+- Career preferences
+
+Currently, the system is designed primarily for Class 10 students who are selecting their stream for higher secondary education. Future updates will expand support for Class 12 students, college recommendations, skill assessments, and advanced career guidance.
+
+---
+
+🚀 Live Project
+
 https://margdarshakaii.streamlit.app/
-Your Smart Career & Stream Guidance Partner
-
-## 📌 About the Project
-
-Margdarshak AI is an AI-powered career and stream recommendation platform developed using Python and Streamlit.  
-The project helps students choose the most suitable stream after 10th and 12th based on:
-
-- Academic Performance
-- Subject-wise Marks
-- Interests & Preferences
-- Skills & Strengths
-- Career Goals
-
-The system provides smart AI-based recommendations for streams like:
-
-- Science
-- Commerce
-- Arts/Humanities
-- Technology
-- Medical
-- Business
-- Design
-- Government Jobs
-- Creative Fields
 
 ---
 
-## 🚀 Features
+🎯 Problem Statement
 
-- AI-based Stream Prediction
-- Career Guidance System
-- Student Interest Analysis
-- 10th & 12th Marks Evaluation
-- Secure Login & Signup System
+Many students choose streams based on peer pressure, trends, or incomplete information. This often leads to confusion and dissatisfaction later in their academic journey.
+
+Margdarshak AI aims to solve this problem by providing data-driven and AI-assisted stream recommendations.
+
+---
+
+✨ Features
+
+User Management
+
+- User Registration
+- Secure Login System
+- Profile Management
+- Password Update
 - Profile Photo Upload
-- MongoDB Database Integration
-- Fast and Interactive Streamlit UI
 
----
+AI-Based Stream Recommendation
 
-## 🛠️ Technologies Used
+The recommendation system uses three independent prediction models:
 
-### Frontend
-- Streamlit
+1. Interest Analysis Model
 
-### Backend
-- Python
+Analyzes the student's career goals and interests entered as text.
 
-### Database
-- MongoDB Atlas
+Algorithm Used:
 
-### Machine Learning
-- Scikit-learn
 - CountVectorizer
 - Multinomial Naive Bayes
 
-### Data Handling
-- Pandas
+---
+
+2. Academic Performance Model
+
+Predicts suitable streams using subject-wise marks.
+
+Subjects Considered:
+
+- Mathematics
+- Science
+- Social Science
+- English
+
+Algorithm Used:
+
+- Random Forest Classifier
 
 ---
 
-## 📂 Project Structure
+3. Preference Analysis Model
 
-```bash
+Evaluates:
+
+- Mathematics Interest
+- Science Interest
+- Business Interest
+- Creativity
+- Stress Handling Ability
+
+Algorithm Used:
+
+- Random Forest Classifier
+
+---
+
+Final Recommendation Engine
+
+The final stream recommendation is generated using a majority voting system.
+
+Final Recommendation =
+Most Common Prediction among:
+1. Interest Model
+2. Marks Model
+3. Preference Model
+
+---
+
+🛠 Technologies Used
+
+Frontend
+
+- Streamlit
+
+Backend
+
+- Python
+
+Database
+
+- MongoDB Atlas
+
+Data Processing
+
+- Pandas
+
+Machine Learning
+
+- Scikit-Learn
+
+Visualization
+
+- Matplotlib
+
+---
+
+📂 Project Structure
+
 MargdarshakAI/
 │
 ├── MargdarshakAi.py
 ├── pages/
+│   └── Dashboard.py
+│
 ├── images/
+│   ├── user photos
+│   └── updateImg/
+│
 ├── background_img/
+│   └── bg.png
+│
+├── Stream1.csv
+├── StudentMark.csv
+├── Preference.csv
+│
 ├── requirements.txt
 └── README.md
-```
-## System Design
 
-![System Design](images/dfd.png)
+---
+
+⚙️ Machine Learning Workflow
+
+Interest Prediction
+
+Student Goal Text
+        ↓
+CountVectorizer
+        ↓
+MultinomialNB
+        ↓
+Predicted Stream
+
+Marks Prediction
+
+Student Marks
+        ↓
+Random Forest
+        ↓
+Predicted Stream
+
+Preference Prediction
+
+Interest Sliders
+        ↓
+Random Forest
+        ↓
+Predicted Stream
+
+Final Decision
+
+Interest Prediction
+        ↓
+Marks Prediction
+        ↓
+Preference Prediction
+        ↓
+Majority Voting
+        ↓
+Final Stream Recommendation
+
+---
+
+🔐 Database Information
+
+MongoDB is used for storing:
+
+- Username
+- Password
+- Date of Birth
+- Profile Photo
+
+Collection Structure
+
+User
+│
+└── Info
+     ├── Name
+     ├── Pass
+     ├── DOB
+     └── Photo
+
+---
+
+🔮 Future Enhancements
+
+- Support for Class 12 students
+- Career Roadmaps
+- College Recommendations
+- Deep Learning Models
+- Skill Assessment Tests
+- AI Chat Assistant
+- Personalized Career Reports
+- Scholarship Suggestions
+- Resume Builder
+
+---
+
+👨‍💻 Developer
+
+Hrithick Kumar
+
+Project Motto
+
+"Guiding Students Towards the Right Future with Artificial Intelligence."
+
+Contact
+
+Email: kumarhrithick369@gmail.com
+
+GitHub: Hrithick-kumar
+
+---
+
+📜 License
+
+This project is developed for educational and research purposes.
