@@ -226,7 +226,7 @@ User
 - Scholarship Suggestions
 - Resume Builder
 - Personalized Career Reports
-
+```
 ##👨‍💻 Developer
 
 Hrithick Kumar
