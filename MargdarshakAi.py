@@ -10,7 +10,7 @@ st.set_page_config(page_title="Margdarshak AI",page_icon="🎓",layout="wide")
 
 # ================= DATABASE =================
 
-conn=MongoClient(["MONGO_URI"])
+conn=MongoClient(st.secrets["MONGO_URI"])
 db=conn["User"]
 coll=db["Info"]
 
