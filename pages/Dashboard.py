@@ -45,8 +45,6 @@ def add_bg(image_file):
     """, unsafe_allow_html=True)
 add_bg("background_img/bg.png")
 pasd=""
-@st.dialog("Visual Representation")
-
 st.markdown(f"""
 <h6 style="color:#1A2421;font-size:23px;box-shadow:#1A2421 10px 10px 46px;box-shadow:#1A2421 10px 15px 26px;border-radius:30px;padding:10px 50px;">Explore your potential, discover your strengths, and make smarter academic decisions with Margdarshak AI.</h6><br><br>
 <h2 style="color:#1A2421;">What your goals write here</h2><br<br>
