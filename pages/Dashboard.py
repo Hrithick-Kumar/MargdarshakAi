@@ -105,8 +105,8 @@ if st.button("Predict"):
               final_prediction=Counter(result_list).most_common(1)[0][0]
               st.success(f"Final Recommended Stream: {final_prediction}")
               st.toast(f"Final Recommended Stream: {final_prediction}")
-              plt.plot([10,20,30],["Science","Arts","Commerce"])
-              plt.show()
+       plt.plot([10,20,30],["Science","Arts","Commerce"])
+       plt.show()
 
 @st.dialog("Update photo")
 def updatePhoto():
