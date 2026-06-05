@@ -12,7 +12,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 import base64
 import pandas as pd
-import matplotlib.pyplot as plt
 conn=MongoClient("mongodb+srv://StreamDecider:stream123@cluster0.fgaudsd.mongodb.net/?appName=Cluster0")
 db=conn["User"]
 coll=db["Info"]
@@ -104,20 +103,6 @@ if st.button("Predict"):
               final_prediction=Counter(result_list).most_common(1)[0][0]
               st.success(f"Final Recommended Stream: {final_prediction}")
               st.toast(f"Final Recommended Stream: {final_prediction}")
-
-x = [1, 2, 3, 4]
-y = [1, 4, 9, 16]
-
-# 2. Create the plot
-plt.plot(x, y, marker='o')
-
-# 3. Customize the plot
-plt.title("Sample Plot")
-plt.xlabel("X-axis")
-plt.ylabel("Y-axis")
-
-# 4. Display the plot
-plt.show()
 @st.dialog("Update photo")
 def updatePhoto():
        c1,c2=st.columns(2)
