@@ -227,15 +227,15 @@ User
 - Resume Builder
 - Personalized Career Reports
 ```
-##👨‍💻 Developer
+## 👨‍💻 Developer
 
 Hrithick Kumar
 
 Project Motto
 
-«"**Guiding Students Towards the Right Future with Artificial Intelligence.**"»
+"**Guiding Students Towards the Right Future with Artificial Intelligence.**"
 
-#Contact
+# Contact
 
 📧 Email: kumarhrithick369@gmail.com
 
@@ -243,6 +243,6 @@ Project Motto
 
 ---
 
-#📜 License
+# 📜 License
 
 This project is developed for educational and research purposes.
