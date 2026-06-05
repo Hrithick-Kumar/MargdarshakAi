@@ -111,8 +111,8 @@ if st.button("Predict"):
               final_prediction=Counter(result_list).most_common(1)[0][0]
               st.success(f"Final Recommended Stream: {final_prediction}")
               st.toast(f"Final Recommended Stream: {final_prediction}")
-              if st.button("Visual"):
-                     visual()
+if st.button("Visual"):
+                     visual()              
 
 @st.dialog("Update photo")
 def updatePhoto():
