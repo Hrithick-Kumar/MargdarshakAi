@@ -10,7 +10,7 @@ st.set_page_config(page_title="Margdarshak AI",page_icon="🎓",layout="wide")
 
 # ================= DATABASE =================
 
-conn=MongoClient(st.secrets["mongodb+srv://StreamDecider:stream123@cluster0.fgaudsd.mongodb.net/?appName=Cluster0"])
+conn=MongoClient(["MONGO_URI"])
 db=conn["User"]
 coll=db["Info"]
 
