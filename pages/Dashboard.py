@@ -105,9 +105,20 @@ if st.button("Predict"):
               final_prediction=Counter(result_list).most_common(1)[0][0]
               st.success(f"Final Recommended Stream: {final_prediction}")
               st.toast(f"Final Recommended Stream: {final_prediction}")
-       plt.plot([10,20,30],["Science","Arts","Commerce"])
-       plt.show()
 
+x = [1, 2, 3, 4]
+y = [1, 4, 9, 16]
+
+# 2. Create the plot
+plt.plot(x, y, marker='o')
+
+# 3. Customize the plot
+plt.title("Sample Plot")
+plt.xlabel("X-axis")
+plt.ylabel("Y-axis")
+
+# 4. Display the plot
+plt.show()
 @st.dialog("Update photo")
 def updatePhoto():
        c1,c2=st.columns(2)
