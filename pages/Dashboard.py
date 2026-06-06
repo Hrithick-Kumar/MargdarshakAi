@@ -350,12 +350,10 @@ if st.button(
     )
 
 
-if final_stream in career_map:
-
-    st.subheader("Career Options")
-
-    for career in career_map[final_stream]:
-        st.write("•",career)
+    if final_stream in career_map:
+        st.subheader("Career Options")
+        for career in career_map[final_stream]:
+            st.write("•",career)
 # ================= UPDATE PHOTO =================
 
 @st.dialog("Update Photo")
