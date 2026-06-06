@@ -140,6 +140,35 @@ marks_model = RandomForestClassifier(
 
 marks_model.fit(marks_X, marks_y)
 
+
+#========goal after stream==========
+career_map = {
+
+    "Science":[
+        "Software Engineer",
+        "Doctor",
+        "Data Scientist",
+        "Research Scientist",
+        "AI Engineer"
+    ],
+
+    "Commerce":[
+        "CA",
+        "CS",
+        "Investment Banker",
+        "MBA",
+        "Business Analyst"
+    ],
+
+    "Arts":[
+        "Lawyer",
+        "Journalist",
+        "UPSC",
+        "Psychologist",
+        "Designer"
+    ]
+}
+
 # ================= GOAL SECTION =================
 
 st.header("Career Goal Analysis")
@@ -320,6 +349,13 @@ if st.button(
         f"Marks Analysis → {marks_prediction}"
     )
 
+
+if final_stream in career_map:
+
+    st.subheader("Career Options")
+
+    for career in career_map[final_stream]:
+        st.write("•",career)
 # ================= UPDATE PHOTO =================
 
 @st.dialog("Update Photo")
