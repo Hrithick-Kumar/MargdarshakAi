@@ -2,5 +2,4 @@ streamlit
 pymongo
 scikit-learn
 matplotlib
-joblib
 
