@@ -10,6 +10,7 @@ import base64
 import os
 import time
 
+
 # ================= PAGE CONFIG =================
 
 st.set_page_config(
@@ -65,7 +66,8 @@ add_bg("background_img/bg.png")
 user = coll.find_one({"Name": username})
 
 # ================= HEADER =================
-
+if "recommended_stream" not in st.session_state:
+    st.session_state["recommended_stream"] = "Not Predicted Yet"
 st.title("🎓 Margdarshak AI Dashboard")
 
 st.markdown(
@@ -330,7 +332,7 @@ if st.button(
     else:
     
        final_stream = Counter(results).most_common(1)[0][0]
-
+       st.session_state["recommended_stream"] = final_stream
        st.success(f"🎯 Recommended Stream: {final_stream}" )
 
        st.balloons()
@@ -351,7 +353,7 @@ if st.button(
                st.write("•",career)
 
 #ai counsellor 
-def ask_ai(question):
+def ask_ai(question,stream):
 
     api_key = st.secrets["OPENROUTER_API_KEY"]
 
@@ -365,20 +367,17 @@ def ask_ai(question):
         "messages": [
             {
                 "role": "system",
-                "content": """
+                "content":f"""
                 You are Margdarshak AI.
-
-                You help students with:
-                - Career Guidance
-                - Stream Selection
-                - JEE
-                - NEET
-                - UPSC
-                - College Selection
-                - Future Planning
-
-                Give practical and easy-to-understand answers.
-                """
+                Student Recommended Stream:{stream}You are a career counselor.
+                Give:
+                1. Personalized guidance
+                2. Career roadmap
+                3. Required skills
+                4. Future opportunities
+                5. Suggested exams
+                Keep answers simple and practical.
+"""
             },
             {
                 "role": "user",
@@ -539,41 +538,52 @@ with st.sidebar:
             "MargdarshakAi.py"
         )
 st.divider()
-@st.dialog("MargdarshakAi")
-def MargAi():
-    st.header("🤖 Margdarshak AI Chat")
-    
-    if "messages" not in st.session_state:
+st.info(
+    f"Current Recommended Stream: {st.session_state['recommended_stream']}"
+)
+st.header("🤖 Margdarshak AI Chat")
+
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+for msg in st.session_state.messages:
+
+    with st.chat_message(
+        msg["role"]
+    ):
+
+        st.markdown(
+            msg["content"]
+        )
+
+prompt = st.chat_input(
+    "Ask Margdarshak AI..."
+)
+
+if prompt:
+
+    st.session_state.messages.append(
+        {
+            "role":"user",
+            "content":prompt
+        }
+    )
+
+    with st.chat_message("user"):
+        st.markdown(prompt)
+
+    with st.spinner("Thinking..."):
+        answer = ask_ai(prompt,st.session_state["recommended_stream"])
+
+    st.session_state.messages.append(
+        {
+            "role":"assistant",
+            "content":answer
+        }
+    )
+
+    with st.chat_message("assistant"):
+        st.markdown(answer)
+    if st.button("Clear Chat",use_container_width=True):
         st.session_state.messages = []
-    
-    for msg in st.session_state.messages:
-        with st.chat_message(msg["role"]):
-            st.markdown(msg["content"])
-    
-    prompt = st.chat_input("Ask Margdarshak AI...")
-    
-    if prompt:
-        st.session_state.messages.append({
-            "role": "user",
-            "content": prompt
-        })
-        
-        with st.chat_message("user"):
-            st.markdown(prompt)
-        
-        with st.spinner("Thinking..."):
-            answer = ask_ai(prompt)
-        
-        st.session_state.messages.append({
-            "role": "assistant",
-            "content": answer
-        })
-        
-        with st.chat_message("assistant"):
-            st.markdown(answer)
-    
-        if st.button("Clear Chat", use_container_width=True):
-            st.session_state.messages = []
-            st.rerun()
-if st.button("MargdarshakAi Councillor"):
-        MargAi()
+        st.rerun()
