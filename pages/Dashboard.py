@@ -149,7 +149,8 @@ career_map = {
         "Doctor",
         "Data Scientist",
         "Research Scientist",
-        "AI Engineer"
+        "AI Engineer",
+        "NDA"
     ],
 
     "Commerce":[
@@ -323,37 +324,30 @@ if st.button(
     results.append(marks_prediction)
 
     # Final Result
+    if maths=0 or science=0 or english=0 or social=0:
+           st.toast("Please fill details")
+    else:
+    
+       final_stream = Counter(results).most_common(1)[0][0]
 
-    final_stream = Counter(
-        results
-    ).most_common(1)[0][0]
+       st.success(f"🎯 Recommended Stream: {final_stream}" )
 
-    st.success(
-        f"🎯 Recommended Stream: {final_stream}"
-    )
+       st.balloons()
 
-    st.balloons()
+       st.subheader("Prediction Breakdown")
 
-    st.subheader("Prediction Breakdown")
+       if goal_input.strip() != "":
+           st.info(f"Goal Analysis → {goal_prediction}")
 
-    if goal_input.strip() != "":
-        st.info(
-            f"Goal Analysis → {goal_prediction}"
-        )
+           st.info(f"Interest Analysis → {pref_prediction}")
 
-    st.info(
-        f"Interest Analysis → {pref_prediction}"
-    )
-
-    st.info(
-        f"Marks Analysis → {marks_prediction}"
-    )
+           st.info( f"Marks Analysis → {marks_prediction}" )
 
 
-    if final_stream in career_map:
-        st.subheader("Career Options")
-        for career in career_map[final_stream]:
-            st.write("•",career)
+       if final_stream in career_map:
+           st.subheader("Career Options")
+           for career in career_map[final_stream]:
+               st.write("•",career)
 # ================= UPDATE PHOTO =================
 
 @st.dialog("Update Photo")
