@@ -582,11 +582,6 @@ if prompt:
 
     with st.chat_message("assistant"):
         st.markdown(answer)
-    if st.button(
-    "Clear Chat",
-    use_container_width=True
-):
-
-    st.session_state.messages = []
-
-    st.rerun()
+    if st.button("Clear Chat",use_container_width=True):
+        st.session_state.messages = []
+        st.rerun()
