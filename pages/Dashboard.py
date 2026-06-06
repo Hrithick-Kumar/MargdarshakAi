@@ -575,5 +575,5 @@ def MargAi():
         if st.button("Clear Chat", use_container_width=True):
             st.session_state.messages = []
             st.rerun()
-    if st.button("MargdarshakAi Councillor"):
+if st.button("MargdarshakAi Councillor"):
         MargAi()
