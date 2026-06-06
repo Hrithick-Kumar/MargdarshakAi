@@ -10,7 +10,7 @@ import base64
 import os
 import time
 
-================= PAGE CONFIG =================
+#================= PAGE CONFIG =================
 
 st.set_page_config(
 page_title="Margdarshak AI Dashboard",
@@ -18,14 +18,14 @@ page_icon="🎓",
 layout="wide"
 )
 
-================= DATABASE =================
+#================= DATABASE =================
 
 conn = MongoClient(st.secrets["MONGO_URI"])
 
 db = conn["User"]
 coll = db["Info"]
 
-================= LOGIN CHECK =================
+#================= LOGIN CHECK =================
 
 if "User" not in st.session_state:
 st.warning("Please Sign In First")
@@ -34,7 +34,7 @@ st.switch_page("MargdarshakAi.py")
 
 username = st.session_state["User"]
 
-================= BACKGROUND =================
+#================= BACKGROUND =================
 
 def add_bg(image_file):
 
@@ -60,11 +60,11 @@ st.markdown(
 
 add_bg("background_img/bg.png")
 
-================= LOAD USER =================
+#================= LOAD USER =================
 
 user = coll.find_one({"Name": username})
 
-================= HEADER =================
+#================= HEADER =================
 
 if "recommended_stream" not in st.session_state:
 st.session_state["recommended_stream"] = "Not Predicted Yet"
@@ -83,7 +83,7 @@ Margdarshak AI will recommend the most suitable stream.
 unsafe_allow_html=True
 )
 
-================= TEXT MODEL =================
+#================= TEXT MODEL =================
 
 stream_data = pd.read_csv("Stream1.csv")
 
@@ -98,7 +98,7 @@ text_model = MultinomialNB()
 
 text_model.fit(text_matrix, text_y)
 
-================= PREFERENCE MODEL =================
+#================= PREFERENCE MODEL =================
 
 pref_data = pd.read_csv("Preference.csv")
 
@@ -121,7 +121,7 @@ random_state=42
 
 pref_model.fit(pref_X, pref_y)
 
-================= MARKS MODEL =================
+#================= MARKS MODEL =================
 
 marks_data = pd.read_csv("StudentMark.csv")
 
@@ -173,7 +173,7 @@ career_map = {
 
 }
 
-================= GOAL SECTION =================
+#================= GOAL SECTION =================
 
 st.header("Career Goal Analysis")
 
@@ -182,7 +182,7 @@ goal_input = st.text_area(
 height=150
 )
 
-================= PREFERENCE SECTION =================
+#================= PREFERENCE SECTION =================
 
 st.header("Interest Assessment")
 
@@ -227,7 +227,7 @@ stress_level = st.slider(
     5  
 )
 
-================= MARKS SECTION =================
+#================= MARKS SECTION =================
 
 st.header("Academic Performance")
 
@@ -265,7 +265,7 @@ english = st.number_input(
     value=0  
 )
 
-================= PREDICTION =================
+#================= PREDICTION =================
 
 if st.button(
 "Predict My Stream",
@@ -398,7 +398,7 @@ result = response.json()
 
 return result["choices"][0]["message"]["content"]
 
-================= UPDATE PHOTO =================
+#================= UPDATE PHOTO =================
 
 @st.dialog("Update Photo")
 def update_photo():
@@ -445,7 +445,7 @@ if uploaded:
 
         st.rerun()
 
-================= CHANGE PASSWORD =================
+#================= CHANGE PASSWORD =================
 
 @st.dialog("Change Password")
 def change_password():
@@ -487,7 +487,7 @@ if st.button("Update Password"):
             "Incorrect Old Password"  
         )
 
-================= SIDEBAR =================
+#================= SIDEBAR =================
 
 with st.sidebar:
 
