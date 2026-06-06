@@ -542,9 +542,6 @@ with st.sidebar:
             "MargdarshakAi.py"
         )
 st.divider()
-st.info(
-    f"Current Recommended Stream: {st.session_state['recommended_stream']}"
-)
 st.header("Margdarshak AI Chat")
 
 if st.button(
