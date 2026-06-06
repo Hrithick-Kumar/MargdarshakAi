@@ -1,3 +1,4 @@
+import requests
 import streamlit as st
 from pymongo import MongoClient
 from collections import Counter
@@ -348,6 +349,55 @@ if st.button(
            st.subheader("Career Options")
            for career in career_map[final_stream]:
                st.write("•",career)
+
+#ai counsellor 
+def ask_ai(question):
+
+    api_key = st.secrets["OPENROUTER_API_KEY"]
+
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+
+    payload = {
+        "model": "openrouter/free",
+        "messages": [
+            {
+                "role": "system",
+                "content": """
+                You are Margdarshak AI.
+
+                You help students with:
+                - Career Guidance
+                - Stream Selection
+                - JEE
+                - NEET
+                - UPSC
+                - College Selection
+                - Future Planning
+
+                Give practical and easy-to-understand answers.
+                """
+            },
+            {
+                "role": "user",
+                "content": question
+            }
+        ]
+    }
+
+    response = requests.post(
+        "https://openrouter.ai/api/v1/chat/completions",
+        headers=headers,
+        json=payload,
+        timeout=30
+    )
+
+    result = response.json()
+
+    return result["choices"][0]["message"]["content"]
+
 # ================= UPDATE PHOTO =================
 
 @st.dialog("Update Photo")
@@ -487,4 +537,33 @@ with st.sidebar:
 
         st.switch_page(
             "MargdarshakAi.py"
+        )
+st.divider()
+
+st.header("🤖 AI Career Counselor")
+
+question = st.text_input(
+    "Ask your career question"
+)
+if st.button("Ask AI"):
+
+    if question.strip() == "":
+        st.warning("Please enter a question")
+
+    else:
+
+        try:
+
+            with st.spinner("Thinking..."):
+
+                answer = ask_ai(question)
+
+            st.success("AI Response")
+
+            st.write(answer)
+
+        except Exception as e:
+
+            st.error(
+                f"Error: {str(e)}"
         )
