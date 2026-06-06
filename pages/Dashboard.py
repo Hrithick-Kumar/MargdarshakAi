@@ -1,15 +1,15 @@
-import requests
 import streamlit as st
-from pymongo import MongoClient
-from collections import Counter
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
 import base64
 import os
 import time
 
+from pymongo import MongoClient
+from collections import Counter
+
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.ensemble import RandomForestClassifier
 
 # ================= PAGE CONFIG =================
 
@@ -21,7 +21,9 @@ st.set_page_config(
 
 # ================= DATABASE =================
 
-conn = MongoClient(st.secrets["MONGO_URI"])
+conn = MongoClient(
+    st.secrets["MONGO_URI"]
+)
 
 db = conn["User"]
 coll = db["Info"]
@@ -29,22 +31,37 @@ coll = db["Info"]
 # ================= LOGIN CHECK =================
 
 if "User" not in st.session_state:
-    st.warning("Please Sign In First")
+    st.warning(
+        "Please Sign In First"
+    )
     time.sleep(1)
-    st.switch_page("MargdarshakAi.py")
+    st.switch_page(
+        "MargdarshakAi.py"
+    )
 
 username = st.session_state["User"]
+
+# ================= SESSION STATE =================
+
+if "recommended_stream" not in st.session_state:
+    st.session_state[
+        "recommended_stream"
+    ] = "Not Predicted Yet"
 
 # ================= BACKGROUND =================
 
 def add_bg(image_file):
-
-    if not os.path.exists(image_file):
+    if not os.path.exists(
+        image_file
+    ):
         return
-
-    with open(image_file, "rb") as image:
-        encoded = base64.b64encode(image.read()).decode()
-
+    with open(
+        image_file,
+        "rb"
+    ) as image:
+        encoded = base64.b64encode(
+            image.read()
+        ).decode()
     st.markdown(
         f"""
         <style>
@@ -59,24 +76,37 @@ def add_bg(image_file):
         unsafe_allow_html=True
     )
 
-add_bg("background_img/bg.png")
+add_bg(
+    "background_img/bg.png"
+)
 
 # ================= LOAD USER =================
 
-user = coll.find_one({"Name": username})
+user = coll.find_one(
+    {"Name": username}
+)
 
 # ================= HEADER =================
-if "recommended_stream" not in st.session_state:
-    st.session_state["recommended_stream"] = "Not Predicted Yet"
-st.title("🎓 Margdarshak AI Dashboard")
+
+st.title(
+    "🎓 Margdarshak AI Dashboard"
+)
 
 st.markdown(
     """
-    <div style='background:rgba(25,25,25,0.8);padding:20px;border-radius:15px;'>
-    <h3>Discover Your Ideal Career Path</h3>
+    <div style="
+    background:rgba(25,25,25,0.75);
+    padding:20px;
+    border-radius:15px;
+    ">
+    <h3>
+    Discover Your Ideal Career Path
+    </h3>
     <p>
-    Enter your goals, interests and academic performance.
-    Margdarshak AI will recommend the most suitable stream.
+    Enter your interests, goals,
+    academic performance and preferences.
+    Margdarshak AI will recommend
+    the most suitable stream for you.
     </p>
     </div>
     """,
@@ -85,31 +115,37 @@ st.markdown(
 
 # ================= TEXT MODEL =================
 
-stream_data = pd.read_csv("Stream1.csv")
-
-text_X = stream_data["word"]
-text_y = stream_data["stream"]
+stream_data = pd.read_csv(
+    "Stream1.csv"
+)
 
 vectorizer = CountVectorizer()
 
-text_matrix = vectorizer.fit_transform(text_X)
+text_X = vectorizer.fit_transform(
+    stream_data["word"]
+)
 
 text_model = MultinomialNB()
 
-text_model.fit(text_matrix, text_y)
+text_model.fit(
+    text_X,
+    stream_data["stream"]
+)
 
 # ================= PREFERENCE MODEL =================
 
-pref_data = pd.read_csv("Preference.csv")
+pref_data = pd.read_csv(
+    "Preference.csv"
+)
 
 pref_X = pref_data[
-    [
-        "Maths_Interest",
-        "Science_Interest",
-        "Business_Interest",
-        "Creativity",
-        "Stress_Handling_Level"
-    ]
+[
+"Maths_Interest",
+"Science_Interest",
+"Business_Interest",
+"Creativity",
+"Stress_Handling_Level"
+]
 ]
 
 pref_y = pref_data["Stream"]
@@ -119,19 +155,24 @@ pref_model = RandomForestClassifier(
     random_state=42
 )
 
-pref_model.fit(pref_X, pref_y)
+pref_model.fit(
+    pref_X,
+    pref_y
+)
 
 # ================= MARKS MODEL =================
 
-marks_data = pd.read_csv("StudentMark.csv")
+marks_data = pd.read_csv(
+    "StudentMark.csv"
+)
 
 marks_X = marks_data[
-    [
-        "Maths",
-        "Science",
-        "Social Science",
-        "English"
-    ]
+[
+"Maths",
+"Science",
+"Social Science",
+"English"
+]
 ]
 
 marks_y = marks_data["Stream"]
@@ -141,21 +182,22 @@ marks_model = RandomForestClassifier(
     random_state=42
 )
 
-marks_model.fit(marks_X, marks_y)
+marks_model.fit(
+    marks_X,
+    marks_y
+)
 
+# ================= CAREER MAP =================
 
-#========goal after stream==========
 career_map = {
-
     "Science":[
         "Software Engineer",
         "Doctor",
+        "AI Engineer",
         "Data Scientist",
         "Research Scientist",
-        "AI Engineer",
-        "NDA"
+        "NDA Officer"
     ],
-
     "Commerce":[
         "CA",
         "CS",
@@ -163,47 +205,47 @@ career_map = {
         "MBA",
         "Business Analyst"
     ],
-
     "Arts":[
         "Lawyer",
         "Journalist",
-        "UPSC",
         "Psychologist",
+        "UPSC Officer",
         "Designer"
     ]
 }
 
 # ================= GOAL SECTION =================
 
-st.header("Career Goal Analysis")
+st.header(
+    "🎯 Career Goal Analysis"
+)
 
 goal_input = st.text_area(
     "Describe your interests, dreams and future goals",
     height=150
 )
 
-# ================= PREFERENCE SECTION =================
+# ================= INTEREST SECTION =================
 
-st.header("Interest Assessment")
+st.header(
+    "📊 Interest Assessment"
+)
 
 col1, col2 = st.columns(2)
 
 with col1:
-
     maths_interest = st.slider(
         "Maths Interest",
         0,
         10,
         5
     )
-
     science_interest = st.slider(
         "Science Interest",
         0,
         10,
         5
     )
-
     business_interest = st.slider(
         "Business Interest",
         0,
@@ -212,14 +254,12 @@ with col1:
     )
 
 with col2:
-
     creativity = st.slider(
         "Creativity",
         0,
         10,
         5
     )
-
     stress_level = st.slider(
         "Stress Handling Level",
         0,
@@ -229,67 +269,57 @@ with col2:
 
 # ================= MARKS SECTION =================
 
-st.header("Academic Performance")
+st.header(
+    "📚 Academic Performance"
+)
 
 m1, m2 = st.columns(2)
 
 with m1:
-
     maths = st.number_input(
         "Maths Marks",
-        min_value=0,
-        max_value=100,
-        value=0
+        0,
+        100,
+        0
     )
-
     science = st.number_input(
         "Science Marks",
-        min_value=0,
-        max_value=100,
-        value=0
+        0,
+        100,
+        0
     )
 
 with m2:
-
     social = st.number_input(
         "Social Science Marks",
-        min_value=0,
-        max_value=100,
-        value=0
+        0,
+        100,
+        0
     )
-
     english = st.number_input(
         "English Marks",
-        min_value=0,
-        max_value=100,
-        value=0
+        0,
+        100,
+        0
     )
 
 # ================= PREDICTION =================
 
 if st.button(
-    "Predict My Stream",
+    "🚀 Predict My Stream",
     use_container_width=True
 ):
-
     results = []
-
-    # Goal Prediction
-
-    if goal_input.strip() != "":
-
+    if goal_input.strip():
         goal_vector = vectorizer.transform(
             [goal_input]
         )
-
         goal_prediction = text_model.predict(
             goal_vector
         )[0]
-
-        results.append(goal_prediction)
-
-    # Preference Prediction
-
+        results.append(
+            goal_prediction
+        )
     pref_input = pd.DataFrame(
         [[
             maths_interest,
@@ -306,15 +336,12 @@ if st.button(
             "Stress_Handling_Level"
         ]
     )
-
     pref_prediction = pref_model.predict(
         pref_input
     )[0]
-
-    results.append(pref_prediction)
-
-    # Marks Prediction
-
+    results.append(
+        pref_prediction
+    )
     marks_prediction = marks_model.predict(
         [[
             maths,
@@ -323,115 +350,97 @@ if st.button(
             english
         ]]
     )[0]
-
-    results.append(marks_prediction)
-
-    # Final Result
-    if maths==0 or science==0 or english==0 or social==0:
-           st.toast("Please fill details")
-    else:
-    
-       final_stream = Counter(results).most_common(1)[0][0]
-       st.session_state["recommended_stream"] = final_stream
-       st.success(f"🎯 Recommended Stream: {final_stream}" )
-
-       st.balloons()
-
-       st.subheader("Prediction Breakdown")
-
-       if goal_input.strip() != "":
-           st.info(f"Goal Analysis → {goal_prediction}")
-
-           st.info(f"Interest Analysis → {pref_prediction}")
-
-           st.info( f"Marks Analysis → {marks_prediction}" )
-
-
-       if final_stream in career_map:
-           st.subheader("Career Options")
-           for career in career_map[final_stream]:
-               st.write("•",career)
-
-#ai counsellor 
-def ask_ai(question,stream):
-
-    api_key = st.secrets["OPENROUTER_API_KEY"]
-
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-
-    payload = {
-        "model": "openrouter/free",
-        "messages": [
-            {
-                "role": "system",
-                "content":f"""
-                You are Margdarshak AI.
-                Student Recommended Stream:{stream}You are a career counselor.
-                Give:
-                1. Personalized guidance
-                2. Career roadmap
-                3. Required skills
-                4. Future opportunities
-                5. Suggested exams
-                Keep answers simple and practical.
-"""
-            },
-            {
-                "role": "user",
-                "content": question
-            }
-        ]
-    }
-
-    response = requests.post(
-        "https://openrouter.ai/api/v1/chat/completions",
-        headers=headers,
-        json=payload,
-        timeout=30
+    results.append(
+        marks_prediction
     )
-
-    result = response.json()
-
-    return result["choices"][0]["message"]["content"]
-
+    final_stream = Counter(
+        results
+    ).most_common(1)[0][0]
+    st.session_state[
+        "recommended_stream"
+    ] = final_stream
+    st.success(
+        f"🎯 Recommended Stream: {final_stream}"
+    )
+    st.balloons()
+    st.subheader(
+        "Prediction Breakdown"
+    )
+    if goal_input.strip():
+        st.info(
+            f"Goal Analysis → {goal_prediction}"
+        )
+    st.info(
+        f"Interest Analysis → {pref_prediction}"
+    )
+    st.info(
+        f"Marks Analysis → {marks_prediction}"
+    )
+    if final_stream in career_map:
+        st.subheader(
+            "💼 Recommended Careers"
+        )
+        for career in career_map[
+            final_stream
+        ]:
+            st.write(
+                "•",
+                career
+            )
 # ================= UPDATE PHOTO =================
 
-@st.dialog("Update Photo")
+@st.dialog("Update Profile Photo")
 def update_photo():
 
     uploaded = st.file_uploader(
-        "Upload Image",
+        "Upload New Profile Photo",
         type=["png", "jpg", "jpeg"]
     )
 
     if uploaded:
 
-        st.image(uploaded, width=250)
+        st.image(
+            uploaded,
+            width=250
+        )
 
-        if st.button("Save"):
+        if st.button(
+            "Save Photo",
+            use_container_width=True
+        ):
 
             os.makedirs(
                 "images/updateImg",
                 exist_ok=True
             )
 
-            filepath = os.path.join(
-                "images/updateImg",
-                uploaded.name
+            filename = (
+                f"{username}_"
+                f"{uploaded.name}"
             )
 
-            with open(filepath, "wb") as f:
-                f.write(uploaded.getbuffer())
+            filepath = os.path.join(
+                "images/updateImg",
+                filename
+            )
+
+            with open(
+                filepath,
+                "wb"
+            ) as f:
+
+                f.write(
+                    uploaded.getbuffer()
+                )
 
             coll.update_one(
-                {"Name": username},
+                {
+                    "Name": username
+                },
                 {
                     "$set": {
                         "Photo":
-                        f"updateImg/{uploaded.name}"
+                        f"updateImg/{filename}"
                     }
                 }
             )
@@ -450,7 +459,7 @@ def update_photo():
 def change_password():
 
     old_pass = st.text_input(
-        "Old Password",
+        "Current Password",
         type="password"
     )
 
@@ -459,16 +468,52 @@ def change_password():
         type="password"
     )
 
-    if st.button("Update Password"):
+    confirm_pass = st.text_input(
+        "Confirm Password",
+        type="password"
+    )
+
+    if st.button(
+        "Update Password",
+        use_container_width=True
+    ):
 
         user_data = coll.find_one(
-            {"Name": username}
+            {
+                "Name": username
+            }
         )
 
-        if user_data["Pass"] == old_pass:
+        if not old_pass:
+
+            st.warning(
+                "Enter Current Password"
+            )
+
+        elif user_data["Pass"] != old_pass:
+
+            st.error(
+                "Current Password Incorrect"
+            )
+
+        elif len(new_pass) < 6:
+
+            st.warning(
+                "Password must contain at least 6 characters"
+            )
+
+        elif new_pass != confirm_pass:
+
+            st.error(
+                "Passwords do not match"
+            )
+
+        else:
 
             coll.update_one(
-                {"Name": username},
+                {
+                    "Name": username
+                },
                 {
                     "$set": {
                         "Pass": new_pass
@@ -477,32 +522,93 @@ def change_password():
             )
 
             st.success(
-                "Password Updated"
+                "Password Updated Successfully"
+            )
+
+# ================= PROFILE INFO =================
+
+def show_profile():
+
+    st.subheader(
+        "👤 Profile Information"
+    )
+
+    if user:
+
+        st.write(
+            f"Username : {user['Name']}"
+        )
+
+        if "DOB" in user:
+
+            st.write(
+                f"DOB : {user['DOB']}"
+            )
+
+        photo = user.get(
+            "Photo",
+            ""
+        )
+
+        image_path = (
+            f"images/{photo}"
+        )
+
+        if (
+            photo
+            and
+            os.path.exists(
+                image_path
+            )
+        ):
+
+            st.image(
+                image_path,
+                width=250
             )
 
         else:
 
-            st.error(
-                "Incorrect Old Password"
+            st.info(
+                "No Profile Photo"
             )
 
 # ================= SIDEBAR =================
 
 with st.sidebar:
 
-    st.subheader(f"Welcome {username}")
+    st.title(
+        "Margdarshak AI"
+    )
+
+    st.success(
+        f"Welcome {username}"
+    )
+
+    # ---------- Profile Image ----------
 
     if user:
 
-        photo = user.get("Photo", "")
+        photo = user.get(
+            "Photo",
+            ""
+        )
 
-        image_path = f"images/{photo}"
+        image_path = (
+            f"images/{photo}"
+        )
 
-        if os.path.exists(image_path):
+        if (
+            photo
+            and
+            os.path.exists(
+                image_path
+            )
+        ):
 
             st.image(
                 image_path,
-                width=250
+                width=220
             )
 
         else:
@@ -513,38 +619,183 @@ with st.sidebar:
 
     st.divider()
 
+    # ---------- Stream ----------
+
+    st.info(
+        f"""
+Current Stream:
+
+{st.session_state['recommended_stream']}
+"""
+    )
+
+    st.divider()
+
+    # ---------- Buttons ----------
+
     if st.button(
-        "Update Photo",
+        "👤 View Profile",
         use_container_width=True
     ):
+
+        show_profile()
+
+    if st.button(
+        "🖼️ Update Photo",
+        use_container_width=True
+    ):
+
         update_photo()
 
     if st.button(
-        "Change Password",
+        "🔒 Change Password",
         use_container_width=True
     ):
+
         change_password()
 
     st.divider()
 
     if st.button(
-        "Sign Out",
+        "🚪 Sign Out",
         use_container_width=True
     ):
 
         st.session_state.clear()
 
         st.switch_page(
-            "MargdarshakAi.py"
+            "MargdarshakAi.py" )
+# ================= OPENROUTER AI =================
+
+def ask_ai(question, stream):
+
+    api_key = st.secrets[
+        "OPENROUTER_API_KEY"
+    ]
+
+    headers = {
+        "Authorization":
+        f"Bearer {api_key}",
+
+        "Content-Type":
+        "application/json"
+    }
+
+    payload = {
+
+        "model":
+        "openrouter/free",
+
+        "messages": [
+
+            {
+                "role": "system",
+
+                "content": f"""
+You are Margdarshak AI.
+
+Student Recommended Stream:
+{stream}
+
+You are an expert career counselor.
+
+Your job is to help students with:
+
+• Stream Selection
+• Career Guidance
+• JEE
+• NEET
+• UPSC
+• Government Jobs
+• Commerce Careers
+• Arts Careers
+• College Selection
+• Skill Development
+• Future Planning
+
+Rules:
+
+1. Give personalized advice.
+2. Consider the recommended stream.
+3. Suggest careers.
+4. Suggest skills.
+5. Suggest exams.
+6. Keep answers practical.
+7. Use bullet points.
+8. Keep answers student friendly.
+"""
+            },
+
+            {
+                "role": "user",
+
+                "content": f"""
+Recommended Stream:
+{stream}
+
+Student Question:
+{question}
+"""
+            }
+        ]
+    }
+
+    response = requests.post(
+        "https://openrouter.ai/api/v1/chat/completions",
+        headers=headers,
+        json=payload,
+        timeout=60
+    )
+
+    data = response.json()
+
+    if "choices" not in data:
+
+        return (
+            "AI service unavailable.\n\n"
+            + str(data)
         )
+
+    return data["choices"][0]["message"]["content"]
+
+# ================= CHAT HEADER =================
+
 st.divider()
-st.info(
-    f"Current Recommended Stream: {st.session_state['recommended_stream']}"
+
+st.header(
+    "🤖 Margdarshak AI Counselor"
 )
-st.header("🤖 Margdarshak AI Chat")
+
+st.info(
+    f"""
+Current Recommended Stream:
+
+{st.session_state['recommended_stream']}
+"""
+)
+
+# ================= CHAT MEMORY =================
 
 if "messages" not in st.session_state:
+
     st.session_state.messages = []
+
+# ================= CLEAR CHAT =================
+
+col1, col2 = st.columns([3,1])
+
+with col2:
+
+    if st.button(
+        "🗑️ Clear Chat",
+        use_container_width=True
+    ):
+
+        st.session_state.messages = []
+
+        st.rerun()
+
+# ================= DISPLAY CHAT =================
 
 for msg in st.session_state.messages:
 
@@ -556,34 +807,104 @@ for msg in st.session_state.messages:
             msg["content"]
         )
 
+# ================= CHAT INPUT =================
+
 prompt = st.chat_input(
     "Ask Margdarshak AI..."
 )
+
+# ================= USER MESSAGE =================
 
 if prompt:
 
     st.session_state.messages.append(
         {
-            "role":"user",
-            "content":prompt
+            "role": "user",
+            "content": prompt
         }
     )
 
-    with st.chat_message("user"):
-        st.markdown(prompt)
+    with st.chat_message(
+        "user"
+    ):
 
-    with st.spinner("Thinking..."):
-        answer = ask_ai(prompt,st.session_state["recommended_stream"])
+        st.markdown(
+            prompt
+        )
 
-    st.session_state.messages.append(
-        {
-            "role":"assistant",
-            "content":answer
-        }
-    )
+    try:
 
-    with st.chat_message("assistant"):
-        st.markdown(answer)
-    if st.button("Clear Chat",use_container_width=True):
-        st.session_state.messages = []
-        st.rerun()
+        with st.spinner(
+            "Thinking..."
+        ):
+
+            answer = ask_ai(
+                prompt,
+                st.session_state[
+                    "recommended_stream"
+                ]
+            )
+
+        st.session_state.messages.append(
+            {
+                "role": "assistant",
+                "content": answer
+            }
+        )
+
+        # Keep last 20 messages only
+
+        if len(
+            st.session_state.messages
+        ) > 20:
+
+            st.session_state.messages = (
+                st.session_state.messages[-20:]
+            )
+
+        with st.chat_message(
+            "assistant"
+        ):
+
+            st.markdown(
+                answer
+            )
+
+    except Exception as e:
+
+        with st.chat_message(
+            "assistant"
+        ):
+
+            st.error(
+                f"AI Error: {str(e)}"
+            )
+
+# ================= QUICK QUESTIONS =================
+
+st.divider()
+
+st.subheader(
+    "🚀 Quick Questions"
+)
+
+q1, q2 = st.columns(2)
+
+with q1:
+
+    st.markdown("""
+- How can I prepare for my future?
+- What careers suit my stream?
+- Which skills should I learn?
+- How do I prepare for competitive exams?
+""")
+
+with q2:
+
+    st.markdown("""
+- Best colleges for my stream?
+- How to become a Data Scientist?
+- Government job opportunities?
+- Future scope of my stream?
+""")
+        
