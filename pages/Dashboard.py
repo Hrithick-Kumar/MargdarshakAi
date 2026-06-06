@@ -68,7 +68,7 @@ user = coll.find_one({"Name": username})
 # ================= HEADER =================
 if "recommended_stream" not in st.session_state:
     st.session_state["recommended_stream"] = "Not Predicted Yet"
-st.title("🎓 Margdarshak AI Dashboard")
+st.title("Margdarshak AI Dashboard")
 
 st.markdown(
     """
