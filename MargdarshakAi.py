@@ -42,8 +42,8 @@ add_bg("background_img/Bg1.png")
 # ================= HOME =================
 
 st.markdown("""
-<h1 style="color:black;">Margdarshak AI</h1>
-<h3 style="color:black;">Your Smart Career & Stream Guidance Partner</h3>
+<h1 style="color:wheat;">Margdarshak AI</h1>
+<h3 style="color:wheat;">Your Smart Career & Stream Guidance Partner</h3>
 
 <div style="background:rgba(25,25,25,0.8);padding:20px;border-radius:20px;margin-top:20px;">
 <h4>Explore your potential, discover your strengths, and make smarter academic decisions with Margdarshak AI.</h4>
