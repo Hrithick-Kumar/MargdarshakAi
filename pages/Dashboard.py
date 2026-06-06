@@ -324,7 +324,7 @@ if st.button(
     results.append(marks_prediction)
 
     # Final Result
-    if maths=0 or science=0 or english=0 or social=0:
+    if maths==0 or science==0 or english==0 or social==0:
            st.toast("Please fill details")
     else:
     
