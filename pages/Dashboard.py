@@ -539,31 +539,54 @@ with st.sidebar:
             "MargdarshakAi.py"
         )
 st.divider()
+st.header("🤖 Margdarshak AI Chat")
 
-st.header("🤖 AI Career Counselor")
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-question = st.text_input(
-    "Ask your career question"
-)
-if st.button("Ask AI"):
+for msg in st.session_state.messages:
 
-    if question.strip() == "":
-        st.warning("Please enter a question")
+    with st.chat_message(
+        msg["role"]
+    ):
 
-    else:
-
-        try:
-
-            with st.spinner("Thinking..."):
-
-                answer = ask_ai(question)
-
-            st.success("AI Response")
-
-            st.write(answer)
-
-        except Exception as e:
-
-            st.error(
-                f"Error: {str(e)}"
+        st.markdown(
+            msg["content"]
         )
+
+prompt = st.chat_input(
+    "Ask Margdarshak AI..."
+)
+
+if prompt:
+
+    st.session_state.messages.append(
+        {
+            "role":"user",
+            "content":prompt
+        }
+    )
+
+    with st.chat_message("user"):
+        st.markdown(prompt)
+
+    with st.spinner("Thinking..."):
+        answer = ask_ai(prompt)
+
+    st.session_state.messages.append(
+        {
+            "role":"assistant",
+            "content":answer
+        }
+    )
+
+    with st.chat_message("assistant"):
+        st.markdown(answer)
+    if st.button(
+    "Clear Chat",
+    use_container_width=True
+):
+
+    st.session_state.messages = []
+
+    st.rerun()
