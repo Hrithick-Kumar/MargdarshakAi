@@ -59,7 +59,7 @@ def add_bg(image_file):
         unsafe_allow_html=True
     )
 
-add_bg("background_img/bg.png")
+add_bg("background_img/Bg1.png")
 
 # ================= LOAD USER =================
 
