@@ -571,11 +571,7 @@ quick_questions = [
 st.divider()
 
 st.success(
-    f"""
-AI Counselor Ready
-
-Current Stream:
-{st.session_state['recommended_stream']}
+    f"""AI Counselor Ready
 """
       )
 # ================= UPDATE PHOTO =================
