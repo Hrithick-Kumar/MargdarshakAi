@@ -8,17 +8,12 @@ import time
 from pymongo import MongoClient
 from collections import Counter
 
-from sklearn.feature_extraction.text import (
-    CountVectorizer
-)
+from sklearn.feature_extraction.text import CountVectorizer
 
-from sklearn.naive_bayes import (
-    MultinomialNB
-)
+from sklearn.naive_bayes import MultinomialNB
 
-from sklearn.ensemble import (
-    RandomForestClassifier
-)
+
+from sklearn.ensemble import RandomForestClassifier
 
 # ================= PAGE CONFIG =================
 
@@ -30,70 +25,38 @@ st.set_page_config(
 
 # ================= DATABASE =================
 
-conn = MongoClient(
-    st.secrets["MONGO_URI"]
-)
-
+conn = MongoClient(st.secrets["MONGO_URI"])
 db = conn["User"]
-
 coll = db["Info"]
-
 # ================= LOGIN CHECK =================
 
 if "User" not in st.session_state:
-
-    st.warning(
-        "Please Sign In First"
-    )
-
+    st.warning("Please Sign In First")
     time.sleep(1)
-
-    st.switch_page(
-        "MargdarshakAi.py"
-    )
-
+    st.switch_page("MargdarshakAi.py")
 username = st.session_state["User"]
 
 # ================= SESSION STATE =================
 
 if "recommended_stream" not in st.session_state:
-
-    st.session_state[
-        "recommended_stream"
-    ] = "Not Predicted Yet"
+    st.session_state["recommended_stream"] = "Not Predicted Yet"
 
 if "messages" not in st.session_state:
-
-    st.session_state[
-        "messages"
-    ] = []
+    st.session_state["messages"] = []
 
 # ================= BACKGROUND =================
 
 def add_bg(image_file):
-
-    if not os.path.exists(
-        image_file
-    ):
+    if not os.path.exists(image_file):
         return
-
-    with open(
-        image_file,
-        "rb"
-    ) as image:
-
-        encoded = base64.b64encode(
-            image.read()
-        ).decode()
-
+    with open(image_file,"rb") as image:
+        encoded = base64.b64encode(image.read()).decode()
     st.markdown(
         f"""
         <style>
 
         .stApp{{
-            background-image:url(
-            "data:image/png;base64,{encoded}"
-            );
+            background-image:url("data:image/png;base64,{encoded}");
             background-size:cover;
             background-position:center;
             background-repeat:no-repeat;
@@ -110,18 +73,11 @@ add_bg(
 
 # ================= LOAD USER =================
 
-user = coll.find_one(
-    {
-        "Name": username
-    }
-)
+user = coll.find_one({"Name": username})
 
 # ================= HEADER =================
 
-st.title(
-    "🎓 Margdarshak AI Dashboard"
-)
-
+st.title("Margdarshak AI Dashboard")
 st.markdown(
     """
     <div style='
@@ -151,35 +107,16 @@ st.markdown(
 @st.cache_resource
 def load_text_model():
 
-    stream_data = pd.read_csv(
-        "Stream1.csv"
-    )
-
+    stream_data = pd.read_csv("Stream1.csv" )
     text_X = stream_data["word"]
-
     text_y = stream_data["stream"]
-
     vectorizer = CountVectorizer()
-
-    text_matrix = vectorizer.fit_transform(
-        text_X
-    )
-
+    text_matrix = vectorizer.fit_transform(text_X)
     text_model = MultinomialNB()
+    text_model.fit(text_matrix,text_y)
 
-    text_model.fit(
-        text_matrix,
-        text_y
-    )
-
-    return (
-        vectorizer,
-        text_model
-    )
-
-vectorizer, text_model = (
-    load_text_model()
-)
+    return (vectorizer,text_model)
+vectorizer, text_model = (load_text_model())
 
 # ================= PREFERENCE MODEL =================
 
@@ -298,7 +235,7 @@ with st.form(
     # ================= GOAL SECTION =================
 
     st.header(
-        "🎯 Career Goal Analysis"
+        "Career Goal Analysis"
     )
 
     goal_input = st.text_area(
@@ -309,56 +246,23 @@ with st.form(
     # ================= INTEREST SECTION =================
 
     st.header(
-        "📊 Interest Assessment"
+        "Interest Assessment"
     )
 
     col1, col2 = st.columns(2)
 
     with col1:
 
-        maths_interest = st.slider(
-            "Maths Interest",
-            0,
-            10,
-            5
-        )
-
-        science_interest = st.slider(
-            "Science Interest",
-            0,
-            10,
-            5
-        )
-
-        business_interest = st.slider(
-            "Business Interest",
-            0,
-            10,
-            5
-        )
-
+        maths_interest = st.slider("Maths Interest",0,10,5 )
+        science_interest = st.slider("Science Interest",0,10,5)
+        business_interest = st.slider("Business Interest",0,10,5)
     with col2:
-
-        creativity = st.slider(
-            "Creativity",
-            0,
-            10,
-            5
-        )
-
-        stress_level = st.slider(
-            "Stress Handling Level",
-            0,
-            10,
-            5
-        )
+        creativity = st.slider("Creativity", 0, 10,5 )
+        stress_level = st.slider("Stress Handling Level", 0,10, 5)
 
     # ================= MARKS SECTION =================
 
-    st.header(
-        "📚 Academic Performance"
-    )
-
+    st.header("Academic Performance")
     m1, m2 = st.columns(2)
 
     with m1:
@@ -499,7 +403,7 @@ if predict_btn:
         ] = final_stream
 
         st.success(
-            f"🎯 Recommended Stream: {final_stream}"
+            f"Recommended Stream: {final_stream}"
         )
 
         st.balloons()
@@ -529,7 +433,7 @@ if predict_btn:
         if final_stream in career_map:
 
             st.subheader(
-                "💼 Career Options"
+                "Career Options"
             )
 
             for career in career_map[
@@ -870,7 +774,7 @@ Recommended Stream
 st.divider()
 
 st.header(
-    "🤖 Margdarshak AI Chat"
+    "Margdarshak AI Chat"
 )
 
 # ================= CHAT CONTROLS =================
@@ -890,15 +794,6 @@ with col1:
 
         st.rerun()
 
-with col2:
-
-    st.info(
-        f"""
-Current Stream
-
-{st.session_state['recommended_stream']}
-"""
-    )
 
 # ================= CHAT HISTORY =================
 
@@ -990,7 +885,7 @@ if prompt:
 st.divider()
 
 st.subheader(
-    "🚀 Suggested Questions"
+    "Suggested Questions"
 )
 
 q1, q2 = st.columns(2)
@@ -1021,6 +916,3 @@ with q2:
 
 st.divider()
 
-st.caption(
-    "Powered by Margdarshak AI 🚀"
-)
